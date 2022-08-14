@@ -2,11 +2,22 @@ import '../styles/globals.css'
 import { UserProvider } from "@supabase/auth-helpers-react";
 import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import type { AppProps } from 'next/app'
+import Navbar from '../components/layout/Navbar';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import React from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+    const [queryClient] = React.useState(() => new QueryClient({}));
+
     return (
       <UserProvider supabaseClient={supabaseClient}>
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Navbar />
+          <Component {...pageProps} />
+          <ReactQueryDevtools />
+        </QueryClientProvider>
       </UserProvider>
     );
 }
