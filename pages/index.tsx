@@ -5,8 +5,11 @@ import { Fragment } from 'react'
 import HomeHero from '../components/home/HomeHero'
 import HomeMenu from '../components/home/HomeMenu'
 import MenuList from '../components/home/MenuList'
+import getCategories from '../fetchers/getCategories'
+import { Category } from '../types'
 
 const Home: NextPage = () => {
+
   return (
    <Fragment>
      <Head>
@@ -22,3 +25,14 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+
+export async function getStaticProps() {
+   const categories = await getCategories();
+
+   return {
+    props: {
+      categories: categories
+    }
+   }
+}
