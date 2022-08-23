@@ -4,33 +4,23 @@ import Link from 'next/link';
 
 const HomeHero = () => {
   return (
-    <header className="relative h-[95vh]">
-      <div className="absolute inste-0 h-full w-full z-30 bg-gray-600/40">
-        <div className="max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-start min-h-[60vh]">
-          <p className="text-sm text-white uppercase tracking-wide">
-            Tshisanyama | Restaurant
+    <header className="relative bg-slate-800 pb-16 px-4">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 py-12 gap-6">
+        <div className="flex flex-col w-full aspect-square justify-center items-start">
+          <p className="text-slate-100 text-sm md:text-md font-brand mt-8">
+            Taste the difference!
           </p>
-          <h1 className="text-3xl md:text-6xl font-extrabold text-gray-50">
-            Music, Meat & Vibes
+          <h1 className="font-brand text-yellow-200 text-3xl md:text-5xl mb-3">
+            Black Impala <br />
+            Tshisanyama & <br />Restaurant
           </h1>
-          <p className="text-xl md:text-2xl font-medium w-[30ch] mt-3 text-white">
-            Nothings beats good vibes, great company and good food
-          </p>
 
-          <Link href="#menu">
-            <button className="bg-white text-gray-800 mt-4 rounded-lg font-medium uppercase px-8 py-2">
-              Menu
-            </button>
-          </Link>
+          <p className="text-slate-300 text-sm md:text-lg max-w-[60ch]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut ipsa quasi in fugiat obcaecati reiciendis facere dignissimos? Nesciunt ex harum tenetur perferendis non cum perspiciatis!</p>
+
+          <Link href="/menu"><a className="bg-yellow-200 hover:bg-yellow-300 cursor-pointer text-slate-800 text-lg font-brand font-bold mt-4 px-8 py-2">Explore Menu</a></Link>
         </div>
+        <Image src="/images/porkchop.jpg" alt="Pork" width={1500} height={1500} className="w-full aspect-square" />
       </div>
-      <Image
-        src="/images/steak.jpg"
-        alt="background"
-        width={2000}
-        height={1125}
-        className="w-full h-full object-cover"
-      />
     </header>
   );
 };

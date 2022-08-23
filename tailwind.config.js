@@ -6,7 +6,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        brand: "'Cormorant Upright', serif",
+      },
+    },
   },
   plugins: [
     require("@tailwindcss/typography"),
