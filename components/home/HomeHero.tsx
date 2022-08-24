@@ -12,14 +12,34 @@ const HomeHero = () => {
           </p>
           <h1 className="font-brand text-yellow-200 text-3xl md:text-5xl mb-3">
             Black Impala <br />
-            Tshisanyama & <br />Restaurant
+            Tshisanyama & <br />
+            Restaurant
           </h1>
 
-          <p className="text-slate-300 text-sm md:text-lg max-w-[60ch]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut ipsa quasi in fugiat obcaecati reiciendis facere dignissimos? Nesciunt ex harum tenetur perferendis non cum perspiciatis!</p>
+          <p className="text-slate-300 text-sm md:text-lg max-w-[60ch]">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut ipsa
+            quasi in fugiat obcaecati reiciendis facere dignissimos? Nesciunt ex
+            harum tenetur perferendis non cum perspiciatis!
+          </p>
 
-          <Link href="/menu"><a className="bg-yellow-200 hover:bg-yellow-300 cursor-pointer text-slate-800 text-lg font-brand font-bold mt-4 px-8 py-2">Explore Menu</a></Link>
+          <Link href="/menu">
+            <a className="bg-yellow-200 hover:bg-yellow-300 cursor-pointer text-slate-800 text-lg font-brand font-bold mt-4 px-8 py-2">
+              Explore Menu
+            </a>
+          </Link>
         </div>
-        <Image src="/images/porkchop.jpg" alt="Pork" width={1500} height={1500} className="w-full aspect-square" />
+
+        <div className="w-full relative isolate p-8">
+
+              <Image
+                src="/images/porkchop.jpg"
+                alt="Pork"
+                width={1500}
+                height={1500}
+                className="w-full z-40 aspect-square"
+              />
+
+        </div>
       </div>
     </header>
   );

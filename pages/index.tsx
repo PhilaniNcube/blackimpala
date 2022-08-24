@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Fragment } from 'react'
 import HomeHero from '../components/home/HomeHero'
 import HomeMenu from '../components/home/HomeMenu'
+import HomeSectionOne from '../components/home/HomeSectionOne'
 import MenuList from '../components/home/MenuList'
 import getCategories from '../fetchers/getCategories'
 import { Category } from '../types'
@@ -18,8 +19,8 @@ const Home: NextPage = () => {
       <meta name="description" content="Black Impala Restaurant and Tshisanyama "></meta>
      </Head>
      <HomeHero />
+     <HomeSectionOne />
      <HomeMenu />
-     <MenuList />
    </Fragment>
   )
 }
