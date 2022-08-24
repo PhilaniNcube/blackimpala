@@ -48,7 +48,7 @@ const MenuList = ({platters}: {platters: Product[]}) => {
             Beers
           </h3>
           {beersQuery.data?.map((item) => (
-            <Link key={item.id} href={`/menu/platters/${item.id}`}>
+            <Link key={item.id} href={`/menu/beer/${item.id}`}>
               <div className="flex cursor-pointer transition-all hover:bg-slate-50/10 py-2 rounded px-2 my-3 gap-2 items-end">
                 <p className="text-lg text-slate-100 font-brand">{item.name}</p>
                 <span className="border-b border-dotted border-white w-full"></span>
