@@ -4,10 +4,14 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Fragment } from 'react'
+import EventsSection from '../components/home/EventsSection'
+import FounderSection from '../components/home/FounderSection'
 import HomeHero from '../components/home/HomeHero'
 import HomeMenu from '../components/home/HomeMenu'
 import HomeSectionOne from '../components/home/HomeSectionOne'
 import MenuList from '../components/home/MenuList'
+import Recognitions from '../components/home/Recognitions'
+import Testimonials from '../components/home/Testimonials'
 import getCategories from '../fetchers/getCategories'
 import getProducts, { getPlatters } from '../fetchers/getProducts'
 import { Category, Product } from '../types'
@@ -40,6 +44,10 @@ const Home = ({ platters }: { platters: Product[] }) => {
       <HomeSectionOne />
       <HomeMenu />
       <MenuList platters={data} />
+      <FounderSection />
+      <Testimonials />
+      <Recognitions />
+      <EventsSection />
     </Fragment>
   );
 };

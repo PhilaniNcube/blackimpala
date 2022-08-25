@@ -57,6 +57,13 @@ const MenuList = ({platters}: {platters: Product[]}) => {
             </Link>
           ))}
         </div>
+      </div>{" "}
+      <div className="max-w-7xl mx-auto flex justify-center py-8 px-4">
+        <Link href="/menu">
+        <a className="text-center font-extrabold text-slate-800 px-8 py-2 bg-yellow-400">
+         View More
+        </a>
+        </Link>
       </div>
     </section>
   );
