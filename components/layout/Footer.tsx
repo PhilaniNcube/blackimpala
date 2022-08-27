@@ -1,10 +1,8 @@
-import { RiFacebookBoxLine, RiFacebookLine, RiInstagramLine, RiYoutubeLine } from "react-icons/ri";
+import { RiFacebookBoxLine, RiFacebookLine, RiInstagramLine, RiTwitterLine, RiYoutubeLine } from "react-icons/ri";
 
 const Footer = () => {
 
 let date = new Date();
-
-console.log(date.getFullYear())
 
 const tradingHours = [
   "Monday - Thursday: 11am - 12pm",
@@ -47,8 +45,8 @@ const tradingHours = [
               Connect with us on Social Media
             </p>
             <div className="flex mt-4 space-x-2 items-center justify-center">
-              <RiYoutubeLine className="text-2xl text-yellow-400" />
               <RiFacebookLine className="text-2xl text-yellow-400" />
+              <RiTwitterLine className="text-2xl text-yellow-400" />
               <RiInstagramLine className="text-2xl text-yellow-400" />
             </div>
             <p className="text-md mt-4 text-slate-300">
