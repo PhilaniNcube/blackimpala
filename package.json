@@ -20,6 +20,7 @@
     "@tanstack/react-query-devtools": "^4.0.10",
     "date-fns": "^2.29.2",
     "framer-motion": "^7.1.0",
+    "mapbox-gl": "^2.10.0",
     "next": "latest",
     "react": "18.1.0",
     "react-circular-progressbar": "^2.1.0",

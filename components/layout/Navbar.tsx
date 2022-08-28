@@ -3,7 +3,7 @@ import {AnimatePresence, motion} from "framer-motion"
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
-import { RiMenuFill, RiShoppingBagLine } from "react-icons/ri";
+import { RiMenLine, RiMenu2Line, RiMenuFill, RiShoppingBagLine } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 
@@ -70,7 +70,9 @@ const Navbar = () => {
       {/**Desktop Nav** **/}
       <div className="hidden max-w-7xl mx-auto w-full md:flex justify-between py-2 px-4">
         <div id="logo">
-          <h3 className="text-slate-50 text-xl font-bold font-brand">Black Impala</h3>
+          <h3 className="text-slate-50 text-xl font-bold font-brand">
+            Black Impala
+          </h3>
         </div>
 
         <ul className="flex space-x-3 items-center">
@@ -125,6 +127,43 @@ const Navbar = () => {
             </Fragment>
           )}
         </div>
+      </div>
+
+      {/****Mobile Nav***/}
+      <div className="flex md:hidden justify-between w-full px-4 py-2">
+        <Link href="/">
+          <a className="text-slate-200 font-brand text-lg">Black Impala</a>
+        </Link>
+
+        <RiMenu2Line
+          onClick={() => setOpen(!open)}
+          className="h-8 w-8 text-slate-200 object-cover"
+        />
+
+        <AnimatePresence exitBeforeEnter initial={false}>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 30 }}
+              transition={{ duration: 0.4 }}
+              className="bg-slate-900 absolute inset-0 w-1/2 h-screen z-20 flex flex-col"
+            >
+              {navItems.map((item, i) => (
+                <Link key={i} href={item.href}>
+                  <a
+                    onClick={() => setOpen(false)}
+                    className={`w-full px-4 py-2 text-slate-200 ${
+                      item.active ? "bg-black" : "bg-transparent"
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
