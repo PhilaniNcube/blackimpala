@@ -5,17 +5,14 @@ import Head from "next/head";
 import { Fragment } from "react";
 import { Product } from "../../../types";
 
-const Platter = ({product}: {product: Product}) => {
+const Platter = ({ product }: { product: Product }) => {
+  const date = new Date();
 
-  const date = new Date()
+  let time = date.getTime();
 
-  let time = date.getTime()
+  let closed = parseInt(format(time, "HH")) > 18;
 
-  let closed = parseInt(format(time, 'HH')) > 18;
-
-  console.log({closed})
-
-
+  console.log({ closed });
 
   return (
     <Fragment>
@@ -53,7 +50,10 @@ const Platter = ({product}: {product: Product}) => {
               </button>
 
               {closed && (
-                <p className="mt-4 text-yellow-200 font-brand text-xl font-bold">We are closed for orders now. The shop will be open again at 11am.</p>
+                <p className="mt-4 text-yellow-200 font-brand text-xl font-bold">
+                  We are closed for orders now. The shop will be open again at
+                  11am.
+                </p>
               )}
 
               <p className="mt-4 text-slate-200 font-brand text-sm">
@@ -69,22 +69,20 @@ const Platter = ({product}: {product: Product}) => {
 };
 export default Platter;
 
-
-
-export async function getServerSideProps({params: {id}}: {params: {id: string}}) {
+export async function getServerSideProps({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
   const { data, error } = await supabaseClient
     .from("products")
-    .select("*, category(*)").eq('id', id).single()
-
+    .select("*, category(*)")
+    .eq("id", id)
+    .single();
 
   return {
     props: {
-      product:data,
+      product: data,
     },
-
   };
 }
-
-
-
-

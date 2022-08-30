@@ -53,8 +53,8 @@ const MenuList = () => {
         </h2>
         <div className="grid gird-cols-1 mb-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {platters?.map((item) => (
-            <Link key={item.id} href={`/menu/platters/${item.id}`}>
-              <Fragment>
+            <Fragment key={item.id}>
+              <Link key={item.id} href={`/menu/platters/${item.id}`}>
                 <div className="cursor-pointer transition-all hover:bg-slate-50/10 py-2 rounded px-2 my-3 gap-2 items-end">
                   <div className="flex ">
                     <p className="text-lg text-slate-100 font-brand flex-2">
@@ -69,8 +69,8 @@ const MenuList = () => {
                     </p>
                   </div>
                 </div>
-              </Fragment>
-            </Link>
+              </Link>
+            </Fragment>
           ))}
         </div>
         <Image
@@ -85,8 +85,8 @@ const MenuList = () => {
         </h2>
         <div className="grid gird-cols-1 mb-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {beers?.map((item) => (
-            <Link key={item.id} href={`/menu/beers/${item.id}`}>
-              <Fragment>
+            <Fragment>
+                <Link key={item.id} href={`/menu/beers/${item.id}`}>
                 <div className="cursor-pointer transition-all hover:bg-slate-50/10 py-2 rounded px-2 my-3 gap-2 items-end">
                   <div className="flex ">
                     <p className="text-lg text-slate-100 font-brand flex-2">
@@ -101,8 +101,8 @@ const MenuList = () => {
                     </p>
                   </div>
                 </div>
-              </Fragment>
             </Link>
+              </Fragment>
           ))}
         </div>
         <Image
@@ -117,8 +117,8 @@ const MenuList = () => {
         </h2>
         <div className="grid gird-cols-1 mb-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {salads?.map((item) => (
-            <Link key={item.id} href={`/menu/salads/${item.id}`}>
-              <Fragment>
+            <Fragment>
+                <Link key={item.id} href={`/menu/salads/${item.id}`}>
                 <div className="cursor-pointer transition-all hover:bg-slate-50/10 py-2 rounded px-2 my-3 gap-2 items-end">
                   <div className="flex ">
                     <p className="text-lg text-slate-100 font-brand flex-2">
@@ -133,8 +133,8 @@ const MenuList = () => {
                     </p>
                   </div>
                 </div>
-              </Fragment>
             </Link>
+              </Fragment>
           ))}
         </div>
         <Image
@@ -149,8 +149,8 @@ const MenuList = () => {
         </h2>
         <div className="grid gird-cols-1 mb-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {stews?.map((item) => (
-            <Link key={item.id} href={`/menu/stews/${item.id}`}>
-              <Fragment>
+            <Fragment>
+                <Link key={item.id} href={`/menu/stews/${item.id}`}>
                 <div className="cursor-pointer transition-all hover:bg-slate-50/10 py-2 rounded px-2 my-3 gap-2 items-end">
                   <div className="flex ">
                     <p className="text-lg text-slate-100 font-brand flex-2">
@@ -165,8 +165,8 @@ const MenuList = () => {
                     </p>
                   </div>
                 </div>
-              </Fragment>
-            </Link>
+               </Link>
+             </Fragment>
           ))}
         </div>
         <Image
@@ -181,8 +181,8 @@ const MenuList = () => {
         </h2>
         <div className="grid gird-cols-1 mb-3 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {meals?.map((item) => (
-            <Link key={item.id} href={`/menu/meals/${item.id}`}>
-              <Fragment>
+            <Fragment>
+              <Link key={item.id} href={`/menu/meals/${item.id}`}>
                 <div className="cursor-pointer transition-all hover:bg-slate-50/10 py-2 rounded px-2 my-3 gap-2 items-end">
                   <div className="flex ">
                     <p className="text-lg text-slate-100 font-brand flex-2">
@@ -197,8 +197,8 @@ const MenuList = () => {
                     </p>
                   </div>
                 </div>
-              </Fragment>
-            </Link>
+              </Link>
+            </Fragment>
           ))}
         </div>
       </div>
