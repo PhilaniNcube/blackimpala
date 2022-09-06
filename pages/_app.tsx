@@ -9,6 +9,10 @@ import React from 'react';
 import {store} from '../store'
 import {Provider} from 'react-redux'
 import Footer from '../components/layout/Footer';
+import { ShoppingCartProvider } from '../context/ShoppingCartContext';
+
+
+
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -16,15 +20,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return (
       <Provider store={store}>
-       <UserProvider supabaseClient={supabaseClient}>
-        <QueryClientProvider client={queryClient}>
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
-          <ReactQueryDevtools />
-        </QueryClientProvider>
-       </UserProvider>
-        </Provider>
+        <UserProvider supabaseClient={supabaseClient}>
+          <QueryClientProvider client={queryClient}>
+            <ShoppingCartProvider>
+              <Navbar />
+              <Component {...pageProps} />
+              <Footer />
+
+              <ReactQueryDevtools />
+            </ShoppingCartProvider>
+          </QueryClientProvider>
+        </UserProvider>
+      </Provider>
     );
 }
 

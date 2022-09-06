@@ -2,17 +2,33 @@ import { supabaseClient } from "@supabase/auth-helpers-nextjs";
 import { format } from "date-fns";
 import Image from "next/future/image";
 import Head from "next/head";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { RiAddLine,  RiSubtractLine } from "react-icons/ri";
+import { useShoppingCart } from "../../../context/ShoppingCartContext";
+
+
 import { Product } from "../../../types";
 
-const Platter = ({ product }: { product: Product }) => {
+const Product = ({ product }: { product: Product }) => {
   const date = new Date();
 
   let time = date.getTime();
 
-  let closed = parseInt(format(time, "HH")) > 18;
+  let closed = parseInt(format(time, "HH")) > 23;
 
   console.log({ closed });
+
+
+  const {
+    cartQuantity,
+    decreaseCartQuantity,
+    increaseCartQuantity,
+    getItemQuantity,
+  } = useShoppingCart();
+
+
+    let quantity = getItemQuantity(product.id);
+
 
   return (
     <Fragment>
@@ -41,10 +57,25 @@ const Platter = ({ product }: { product: Product }) => {
               <h2 className="mt-8 text-5xl text-slate-100 font-brand font-bold">
                 R{product.price.toFixed(2)}
               </h2>
+              <div className="flex space-x-3 items-center mt-8">
+                <span className="text-white text-2xl font-bold">Quantity</span>
+                <div className="flex items-center pl-8 ">
+                  <button onClick={() => decreaseCartQuantity(product.id)}>
+                    <RiSubtractLine className="text-white flex-1 h-8 w-8 cursor-pointer" />
+                  </button>
 
+                  <span className="text-white flex-2 text-2xl px-12">
+                    {quantity}
+                  </span>
+                  <button onClick={() => increaseCartQuantity(product.id)}>
+                    <RiAddLine className="text-white flex-1 h-8 w-8 cursor-pointer" />
+                  </button>
+                </div>
+              </div>
               <button
                 disabled={closed}
                 className="bg-yellow-400 px-8 py-2 rounded text-slate-900 font-bold uppercase mt-8 font-brand"
+                onClick={() => increaseCartQuantity(product.id)}
               >
                 {closed ? "Closed" : "Add To Cart"}
               </button>
@@ -56,7 +87,7 @@ const Platter = ({ product }: { product: Product }) => {
                 </p>
               )}
 
-              <p className="mt-4 text-slate-200 font-brand text-sm">
+              <p className="mt-4 text-slate-200 text-lg">
                 Please note that we do not deliver to areas further than 20km
                 from our location
               </p>
@@ -67,7 +98,7 @@ const Platter = ({ product }: { product: Product }) => {
     </Fragment>
   );
 };
-export default Platter;
+export default Product;
 
 export async function getServerSideProps({
   params: { id },

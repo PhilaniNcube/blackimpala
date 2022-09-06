@@ -10,7 +10,7 @@ const Platter = ({ product }: { product: Product }) => {
 
   let time = date.getTime();
 
-  let closed = parseInt(format(time, "HH")) > 18;
+  let closed = parseInt(format(time, "HH")) > 23;
 
   console.log({ closed });
 

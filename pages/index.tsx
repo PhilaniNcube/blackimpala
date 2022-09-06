@@ -12,11 +12,15 @@ import HomeSectionOne from '../components/home/HomeSectionOne'
 import MenuList from '../components/home/MenuList'
 import Recognitions from '../components/home/Recognitions'
 import Testimonials from '../components/home/Testimonials'
+
 import getCategories from '../fetchers/getCategories'
 import getProducts, { getPlatters } from '../fetchers/getProducts'
 import { Category, Product } from '../types'
 
 const Home = ({ platters }: { platters: Product[] }) => {
+
+
+
   const { data, error, isLoading, isSuccess } = useQuery(
     ["platters"],
     getPlatters,

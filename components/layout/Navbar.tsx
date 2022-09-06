@@ -3,13 +3,18 @@ import {AnimatePresence, motion} from "framer-motion"
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
-import { RiMenLine, RiMenu2Line, RiMenuFill, RiShoppingBagLine } from "react-icons/ri";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { MdOutlineRestaurantMenu } from "react-icons/md";
+import {  RiMenu2Line, RiShoppingBag3Line } from "react-icons/ri";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
+
+
 
 const Navbar = () => {
 
   const [open, setOpen] = useState(false)
+
+
+
+  const {cartQuantity, openCart, closeCart} = useShoppingCart()
 
   const router = useRouter()
 
@@ -126,6 +131,33 @@ const Navbar = () => {
               ))}
             </Fragment>
           )}
+          <AnimatePresence exitBeforeEnter>
+            <motion.div
+              animate={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <RiShoppingBag3Line
+                onClick={openCart}
+                className="text-white h-8 w-8 cursor-pointer"
+              />
+              <AnimatePresence exitBeforeEnter initial={false}>
+                {cartQuantity > 0 && (
+                  <motion.span
+                    animate={{ opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="absolute rounded-full h-5 w-5 flex pointer-events-none justify-center items-center top-0 right-0 bg-red-500 text-white"
+                  >
+                    {cartQuantity}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 
@@ -135,10 +167,32 @@ const Navbar = () => {
           <a className="text-slate-200 font-brand text-lg">Black Impala</a>
         </Link>
 
-        <RiMenu2Line
-          onClick={() => setOpen(!open)}
-          className="h-8 w-8 text-slate-200 object-cover"
-        />
+        <div className="flex items-center space-x-3">
+          <div className="relative">
+            <RiShoppingBag3Line
+              onClick={openCart}
+              className="text-white h-8 w-8 cursor-pointer"
+            />{" "}
+            <AnimatePresence exitBeforeEnter initial={false}>
+              {cartQuantity > 0 && (
+                <motion.span
+                  animate={{ opacity: 1 }}
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute rounded-full h-5 w-5 pointer-events-none flex justify-center items-center top-0 right-0 bg-red-500 text-white"
+                >
+                  {cartQuantity}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <RiMenu2Line
+            onClick={() => setOpen(!open)}
+            className="h-8 w-8 text-slate-200 object-cover"
+          />
+        </div>
 
         <AnimatePresence exitBeforeEnter initial={false}>
           {open && (

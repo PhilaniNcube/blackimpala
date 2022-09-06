@@ -175,6 +175,15 @@ export const getBreakfasts = async () => {
 
 }
 
+export const getProductById = async (id:string) =>  {
+    let { data: products, error } = await supabaseClient.from('products').select('*, category(*)').eq('id', id).single()
+
+          if (error) {
+    throw new Error(error.message)
+  }
+  return products as Product
+}
+
 export default getProducts
 
 
