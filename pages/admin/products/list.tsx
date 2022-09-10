@@ -1,4 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { Switch } from "@headlessui/react";
+import { supabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useMutation, useQuery , useQueryClient} from "@tanstack/react-query";
 import { format } from "date-fns";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -12,10 +14,30 @@ import { Product } from "../../../types";
 
 const Admin = ({products}: {products: Product[]}) => {
 
+  const queryClient = useQueryClient()
+
   const {isLoading, isSuccess, error, data} = useQuery( ['products'], getProducts, {
     initialData: products,
     refetchOnMount: true,
     refetchOnWindowFocus: true,
+  })
+
+  const toggleInStock = (product:Product ) => {
+
+    return supabaseClient.from('products').update({instock: !product.inStock}).eq('id', product.id).single()
+
+  }
+
+  const mutation = useMutation( async (product: Product) => {
+    return await supabaseClient
+      .from("products")
+      .update({ inStock: !product.inStock })
+      .eq("id", product.id)
+      .single();
+  }, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['products'])
+    }
   })
 
   return (
@@ -23,11 +45,6 @@ const Admin = ({products}: {products: Product[]}) => {
       <main className="flex ">
         <Sidebar />
         <div className="flex-1 px-4 max-w-[1540px] ">
-          <div className="flex items-center gap-5 mt-6 ">
-            <ProductsWidget />
-            <CustomerWidget />
-            <OrdersWidget />
-          </div>
           <div className="flex justify-start">
             <Link href="/admin/products/add">
               <a className="bg-sky-700 px-16 py-2 rounded-lg text-white font-medium mt-6">
@@ -35,7 +52,7 @@ const Admin = ({products}: {products: Product[]}) => {
               </a>
             </Link>
           </div>
-          <div className="mt-2">
+          <div className="my-8">
             <>
               <div className="sm:px-6 w-full">
                 <div className="px-4 md:px-10 py-4 md:py-7">
@@ -56,7 +73,7 @@ const Admin = ({products}: {products: Product[]}) => {
                         <th className="font-normal text-left pl-10">Price</th>
 
                         <th className="font-normal text-left">Category</th>
-                        <th className="font-normal text-left">Status</th>
+                        <th className="font-normal text-left">In Stock</th>
                         <th className="font-normal text-left w-32">Actions</th>
                       </tr>
                     </thead>
@@ -66,7 +83,7 @@ const Admin = ({products}: {products: Product[]}) => {
                           key={product.id}
                           className="h-20 text-sm leading-none text-gray-700 border-b border-t border-gray-200 bg-white hover:bg-gray-100"
                         >
-                          <td className="pl-4">{i+1}</td>
+                          <td className="pl-4">{i + 1}</td>
                           <td className="pl-11">
                             <div className="flex items-center">
                               <img
@@ -86,28 +103,32 @@ const Admin = ({products}: {products: Product[]}) => {
                             <p className="mr-16">{product.category.title}</p>
                           </td>
                           <td>
-                            <div
-                              className={`w-20 h-6 flex items-center mr-16 justify-center rounded-full ${product.inStock ? 'bg-blue-200' : 'bg-red-200'}`}
+                            <Switch
+                              checked={product.inStock}
+                              onChange={() => mutation.mutateAsync(product)}
+                              className={`${
+                                product.inStock ? "bg-teal-600" : "bg-red-600"
+                              }
+          relative inline-flex h-[28px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                             >
-                              <p
-                                className={`text-xs leading-3 ${
-                                  product.inStock
-                                    ? "text-blue-800"
-                                    : "text-red-700"
-                                }`}
-                              >
-                                {product.inStock ? "In Stock" : "Out Of Stock"}
-                              </p>
-                            </div>
+                              <span className="sr-only">Use setting</span>
+                              <span
+                                aria-hidden="true"
+                                className={`${
+                                  product.inStock ? "translate-x-9" : "translate-x-0"
+                                }
+            pointer-events-none inline-block h-[25px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+                              />
+                            </Switch>
                           </td>
                           <td>
                             <div className="flex items-center">
-                              <button className="bg-gray-100 mr-3 hover:bg-gray-200 py-2.5 px-5 rounded text-sm leading-3 text-gray-500 focus:outline-none">
-                                Edit
-                              </button>
-                              <button className="bg-gray-100 mr-5 hover:bg-gray-200 py-2.5 px-5 rounded text-sm leading-3 text-gray-500 focus:outline-none">
-                                Call
-                              </button>
+                              <Link href={`/admin/products/${product.id}`}>
+                                <a className="bg-gray-100 mr-3 hover:bg-gray-200 py-2.5 px-5 rounded text-sm leading-3 text-gray-500 focus:outline-none">
+                                  Edit Product
+                                </a>
+                              </Link>
+
                               <div className="relative px-5 pt-2"></div>
                             </div>
                           </td>

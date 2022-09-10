@@ -5,7 +5,7 @@ const getProducts = async () => {
 
   let { data: products, error } = await supabaseClient
   .from('products')
-  .select('*, category(*)')
+  .select('*, category(*)').order('name')
 
   if (error) {
     throw new Error(error.message)

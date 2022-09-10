@@ -39,7 +39,7 @@ const Sidebar = () => {
                 </Fragment>
               </li>
             </Link>
-            <Link passHref href="/admin/products">
+            <Link passHref href="/admin/products/list">
               <li className="flex hover:bg-slate-300 px-3 cursor-pointer items-center py-2 w-full">
                 <Fragment>
                   <MdShoppingBag className="text-slate-700 h-8 w-8" />

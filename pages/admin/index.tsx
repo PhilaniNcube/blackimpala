@@ -18,7 +18,7 @@ const Admin = () => {
             <ProductsWidget />
             <OrdersWidget />
           </div>
-          <div id="charts" className="mt-5 grid grid-cols-7 gap-5">
+          <div id="charts" className="mt-5 min-h-screen grid grid-cols-7 gap-5">
             <Featured />
             <Chart />
           </div>
