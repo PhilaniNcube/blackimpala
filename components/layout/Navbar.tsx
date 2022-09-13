@@ -1,5 +1,6 @@
 import { useUser } from "@supabase/auth-helpers-react";
 import {AnimatePresence, motion} from "framer-motion"
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
@@ -14,7 +15,7 @@ const Navbar = () => {
 
 
 
-  const {cartQuantity, openCart, closeCart} = useShoppingCart()
+  const {cartQuantity, openCart} = useShoppingCart()
 
   const router = useRouter()
 
@@ -71,7 +72,7 @@ const Navbar = () => {
   const {user} = useUser()
 
   return (
-    <nav className="w-full items-center flex bg-slate-800" id="app__navbar">
+    <nav className="w-full items-center flex bg-slate-800 absolute top-0 left-0 right-0 z-50" id="app__navbar">
       {/**Desktop Nav** **/}
       <div className="hidden max-w-7xl mx-auto w-full md:flex justify-between py-2 px-4">
         <div id="logo">
@@ -222,4 +223,4 @@ const Navbar = () => {
     </nav>
   );
 };
-export default Navbar;
+export default dynamic(() => Promise.resolve(Navbar), {ssr: false});

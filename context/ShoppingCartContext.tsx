@@ -2,7 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { createContext, ReactNode, useContext, useState, useEffect } from "react";
 import ShoppingCart from "../components/Cart/ShoppingCart";
 import getProducts, { getProductById } from "../fetchers/getProducts";
+import Cookies from 'js-cookie'
 
+
+const initialCartItems = Cookies.get('shopping_cart') || []
 
 type ShoppingCartProviderProps = {
   children: ReactNode;
@@ -29,9 +32,7 @@ type ShoppingCartContext = {
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
 
-export function useShoppingCart() {
-  return useContext(ShoppingCartContext);
-}
+
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
 
@@ -39,7 +40,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>(
-[]
+    []
   );
 
 
@@ -52,19 +53,15 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
 
   useEffect(() => {
-
-    console.log(window)
-
-
     if (typeof window !== 'undefined') {
-      const data = window.localStorage.getItem("shopping_cart") ;
+      const data = localStorage.getItem("shopping_cart") ;
     if (data !== null) setCartItems(JSON.parse(data));
     }
   },[])
 
 
   useEffect(() => {
-    window.localStorage.setItem('shopping_cart', JSON.stringify(cartItems))
+    localStorage.setItem('shopping_cart', JSON.stringify(cartItems))
   },[cartItems])
 
   const openCart = () => setIsOpen(true);
@@ -133,4 +130,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       <ShoppingCart isOpen={isOpen} closeCart={closeCart} openCart={openCart} />
     </ShoppingCartContext.Provider>
   );
+}
+
+
+export function useShoppingCart() {
+  return useContext(ShoppingCartContext);
 }

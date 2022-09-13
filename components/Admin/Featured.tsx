@@ -5,9 +5,9 @@ import "react-circular-progressbar/dist/styles.css"
 
 const Featured = () => {
 
-  let today = format(new Date(), "dd-MMM");
 
-  console.log(isToday(new Date()));
+
+
 
 
 

@@ -40,3 +40,31 @@ export interface CartItemType {
   quantity: number;
   cart_id: string;
 }
+
+export interface OrderItem {
+  id: string;
+  quantity: number;
+}
+
+export interface IOrderType {
+  id: string;
+  created_at: string;
+  profile_id: string;
+  order_total: number;
+  shipping: number;
+  address: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  postal_code: string;
+  phone_number: string;
+  order_items: OrderItem[]
+}
+
+export interface IOrderItem {
+  id: Product;
+  created_at: string;
+  order_id: string;
+  profile_id: string;
+  quantity: number;
+}

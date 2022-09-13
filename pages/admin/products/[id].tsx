@@ -20,7 +20,7 @@ const UpdateProduct = ({ product, categories }: { product: Product, categories: 
 
     const [productImage, setProductImage] = useState<string | undefined>("");
 
-    console.log({ productImage });
+
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
       setLoading(true);
@@ -39,11 +39,9 @@ const UpdateProduct = ({ product, categories }: { product: Product, categories: 
           .from("products")
           .upload(filePath, file);
 
-        console.log({ upload });
+
 
         const fileUrl: string | undefined = upload?.data?.Key;
-
-        console.log(fileUrl);
 
         setProductImage(
           `https://sqqxwwmtljjqhzmapmkh.supabase.co/storage/v1/object/public/${fileUrl}`
@@ -63,12 +61,7 @@ const UpdateProduct = ({ product, categories }: { product: Product, categories: 
         new FormData(e.currentTarget)
       );
 
-      console.log({
-        name,
-        description,
-        price,
-        productImage,
-      });
+
 
       const { data, error } = await supabaseClient
         .from("products")
@@ -89,7 +82,7 @@ const UpdateProduct = ({ product, categories }: { product: Product, categories: 
         setProductImage("");
         setLoading(false);
         router.push("/admin/products");
-        console.log({data})
+
       }
     };
 

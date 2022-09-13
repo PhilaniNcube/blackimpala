@@ -4,20 +4,19 @@ import { Dialog, Transition } from "@headlessui/react";
 import { RiCloseLine } from "react-icons/ri";
 
 import CartItem from "./CartItem";
-import getProducts from "../../fetchers/getProducts";
-import { useQuery } from "@tanstack/react-query";
+
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { formatCurrency } from "../../utilities/formatCurrency";
+import Link from "next/link";
 
 
 
 export default function ShoppingCart({isOpen, closeCart, openCart  }:{isOpen: boolean, closeCart: () => void, openCart: () => void}) {
 
-console.log('cart',isOpen)
 
 const {cartItems, cartTotal} = useShoppingCart()
 
-console.log('cartItems', cartItems)
+
 
 
 
@@ -82,11 +81,12 @@ console.log('cartItems', cartItems)
                             className="-my-6 divide-y divide-gray-200"
                           >
                             {cartItems.map((product) => (
-                              <CartItem
-                                key={product.id}
-                                id={product.id}
-                                quantity={product.quantity}
-                              />
+                              <Fragment key={product.id}>
+                                <CartItem
+                                  id={product.id}
+                                  quantity={product.quantity}
+                                />
+                              </Fragment>
                             ))}
                           </ul>
                         </div>
@@ -102,12 +102,14 @@ console.log('cartItems', cartItems)
                         Shipping is calculated at checkout.
                       </p>
                       <div className="mt-6">
-                        <a
-                          href="/checkout"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-slate-800 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-slate-700"
-                        >
-                          Checkout
-                        </a>
+                        <Link href="/checkout">
+                          <a
+                            onClick={closeCart}
+                            className="flex items-center justify-center rounded-md border border-transparent bg-slate-800 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-slate-700"
+                          >
+                            Checkout
+                          </a>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>

@@ -14,7 +14,7 @@ export default function Register() {
       const { email, password, last_name, first_name } = Object.fromEntries(
         new FormData(e.currentTarget)
       );
-      console.log({ email, password, last_name, first_name });
+
 
       if (
         typeof email !== "string" ||
@@ -35,13 +35,13 @@ export default function Register() {
         }
       );
 
-      console.log({ data });
+
 
      if (data.error) {
        alert("There was an error signing in!");
      } else {
        alert("Success, you have signed in!");
-       router.push("/");
+       router.push("/menu");
      }
 
     };

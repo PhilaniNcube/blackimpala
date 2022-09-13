@@ -7,38 +7,62 @@ quantity: number;
 
 export interface CartState {
  productsInCart: CartItem[];
- cartTotal: number;
- isOpen: boolean;
+ total: number;
+ cartOpen: boolean;
 
 }
 
 
 const initialState: CartState = {
   productsInCart: [],
-  cartTotal:0,
-  isOpen:false,
+  total:0,
+  cartOpen:false,
 }
-
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItemToCart: (state, action:PayloadAction<CartItem>) => {
-      const productInCart = state.productsInCart.find(product => product.id === action.payload.id)
-      if(!productInCart) {
-        state.productsInCart.push({ ...action.payload, quantity : 1})
+    addItemToCart: (state, action:PayloadAction<Product>) => {
+       const productInCart = state.productsInCart.find(product => product.id === action.payload.id)
 
-        state.cartTotal = state.productsInCart.reduce((acc, product) => {
-            return acc + product.price * product.quantity
-        }, 0)
-      } else {
-        productInCart.quantity++;
-           state.cartTotal = state.productsInCart.reduce((acc, product) => {
-            return acc + product.price * product.quantity
-        }, 0)
-      }
+       if(productInCart === undefined) {
+        state.productsInCart.push({...action.payload, quantity: 1})
+        state.total = state.productsInCart.reduce((acc, product) => {
+         return  acc + product.price * product.quantity
+        },0)
+       } else {
+        productInCart.quantity++
+         state.total = state.productsInCart.reduce((acc, product) => {
+         return  acc + product.price * product.quantity
+        },0)
+       }
     },
+    deleteItemFromCart: (state, action:PayloadAction<Product>) => {
+         const productInCartIndex = state.productsInCart.findIndex((product) => product.id === action.payload.id)
 
+         if(state.productsInCart[productInCartIndex].quantity === 1){
+          state.productsInCart.splice(productInCartIndex, 1)
+           state.total = state.productsInCart.reduce((acc, product) => {
+         return  acc + product.price * product.quantity
+        },0)
+         } else {
+          state.productsInCart[productInCartIndex].quantity--
+           state.total = state.productsInCart.reduce((acc, product) => {
+         return  acc + product.price * product.quantity
+        },0)
+         }
+    },
+    openCart: (state ) => {
+      state.cartOpen = true
+    },
+        closeCart: (state ) => {
+      state.cartOpen = false
+    },
   }
 })
+
+
+export const {addItemToCart, deleteItemFromCart, openCart, closeCart} = cartSlice.actions
+
+export default cartSlice.reducer

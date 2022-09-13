@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 
 const AddProduct = ({categories}: {categories: Category[]}) => {
 
-  console.log({categories})
+
 
   const router = useRouter()
 
@@ -21,7 +21,6 @@ const AddProduct = ({categories}: {categories: Category[]}) => {
 
   const [productImage, setProductImage] = useState<string | undefined>("");
 
-  console.log({productImage})
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
       setLoading(true);
@@ -40,11 +39,11 @@ const AddProduct = ({categories}: {categories: Category[]}) => {
           .from("products")
           .upload(filePath, file);
 
-        console.log({ upload });
+
 
         const fileUrl: string | undefined = upload?.data?.Key;
 
-        console.log(fileUrl);
+
 
         setProductImage(
           `https://sqqxwwmtljjqhzmapmkh.supabase.co/storage/v1/object/public/${fileUrl}`
@@ -65,9 +64,7 @@ const AddProduct = ({categories}: {categories: Category[]}) => {
           new FormData(e.currentTarget)
         );
 
-        console.log({
-        name, description, price , productImage
-        });
+
 
        const { data, error } = await supabaseClient
          .from("products")

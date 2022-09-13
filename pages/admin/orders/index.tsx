@@ -6,7 +6,7 @@ const Admin = () => {
     <Fragment>
       <main className="flex ">
         <Sidebar />
-        <div className="flex-1 px-5 max-w-[1540px]">Orders</div>
+        <div className="flex-1 px-5 max-w-[1540px] min-h-screen">Orders</div>
       </main>
     </Fragment>
   );
