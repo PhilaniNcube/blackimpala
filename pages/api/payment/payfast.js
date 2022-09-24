@@ -6,25 +6,7 @@ export default async function handler(
   res
 ) {
 
-  const generateSignature = (data, passPhrase = null) => {
-  // Create parameter string
-  let pfOutput = "";
-  for (let key in data) {
-    if(data.hasOwnProperty(key)){
-      if (data[key] !== "") {
-        pfOutput +=`${key}=${encodeURIComponent(data[key].trim()).replace(/%20/g, "+")}&`
-      }
-    }
-  }
 
-  // Remove last ampersand
-  let getString = pfOutput.slice(0, -1);
-  if (passPhrase !== null) {
-    getString +=`&passphrase=${encodeURIComponent(passPhrase.trim()).replace(/%20/g, "+")}`;
-  }
-
-  return crypto.createHash("md5").update(getString).digest("hex");
-};
 
   const {id, email, order_total, first_name, last_name, phone_number, order_shipping} = req.body
 
@@ -46,10 +28,10 @@ myData["item_name"] = id;
 
 
 const myPassphrase = process.env.PAYFAST_PASS_PHRASE;
-let signature = generateSignature(myData, myPassphrase);
-
-console.log({signature});
 
 
-res.status(200).json({ data: signature });
+
+
+
+res.status(200).json({ data: 'hello' });
 }

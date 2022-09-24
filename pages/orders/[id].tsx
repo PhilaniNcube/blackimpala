@@ -9,20 +9,11 @@ import { formatCurrency } from "../../utilities/formatCurrency";
 
 const Order = ({
   order,
-  order_items,
-  signature
 }: {
   order: IOrderType;
-  order_items: IOrderItem[];
-  signature: string
 }) => {
 
-console.log({signature})
-
-
   const formRef = useRef<HTMLFormElement>(null)
-
-
 
   return (
     <Fragment>
@@ -50,7 +41,7 @@ console.log({signature})
             <div className="p-4 w-full bg-slate-700 rounded-lg">
               <h2 className="text-md font-medium">Order Items</h2>
               <div className="border border-slate-600 mt-3 p-2 rounded-md">
-                {order_items.map((item, i) => (
+                {/*order_items.map((item, i) => (
                   <Fragment key={i}>
                     <div className="flex space-x-3">
                       <img
@@ -67,7 +58,7 @@ console.log({signature})
                       </span>
                     </div>
                   </Fragment>
-                ))}
+                ))*/}
                 <p className="text-lg mt-4">
                   Subtotal {formatCurrency(order.order_total)}{" "}
                 </p>
@@ -135,48 +126,18 @@ console.log({signature})
 export default Order;
 
 
-export async function getServerSideProps({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
-  let { data, error } = await supabaseClient
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  let { data, error } = await supabaseServerClient(ctx)
     .from("orders")
     .select("*")
-    .eq("id", id)
+    .eq("id", ctx.params?.id)
     .single();
 
-  const initiatePayment = await fetch(
-    `http://localhost:3000/api/payment/payfast`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: data.id,
-        email: data.email,
-        order_total: data.order_total,
-        order_shipping: data.shipping,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        phone_number: data.phone_number,
-      }),
-    }
-  );
-
-  const response = await initiatePayment.json();
-
-  let { data: order_items, error: order_item_errors } = await supabaseClient
-    .from("order_item")
-    .select("*, id(*)")
-    .eq("order_id", id);
+  console.log({ data });
 
   return {
     props: {
       order: data,
-      order_items,
-      signature: response.data,
     },
   };
-}
+};
