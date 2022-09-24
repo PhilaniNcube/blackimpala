@@ -135,43 +135,48 @@ console.log({signature})
 export default Order;
 
 
-export const getServerSideProps:GetServerSideProps = async (ctx) => {
-
+export async function getServerSideProps({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
   let { data, error } = await supabaseClient
     .from("orders")
     .select("*")
-    .eq("id", ctx?.params?.id)
+    .eq("id", id)
     .single();
 
-       const initiatePayment = await fetch(`http://localhost:3000/api/payment/payfast`, {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify({
-           id: data.id,
-           email: data.email,
-           order_total: data.order_total,
-           order_shipping: data.shipping,
-           first_name: data.first_name,
-           last_name: data.last_name,
-           phone_number: data.phone_number,
-         }),
-       });
+  const initiatePayment = await fetch(
+    `http://localhost:3000/api/payment/payfast`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: data.id,
+        email: data.email,
+        order_total: data.order_total,
+        order_shipping: data.shipping,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        phone_number: data.phone_number,
+      }),
+    }
+  );
 
-       const response = await initiatePayment.json();
+  const response = await initiatePayment.json();
 
-    let { data: order_items, error: order_item_errors } =
-      await supabaseServerClient(ctx)
-        .from("order_item")
-        .select("*, id(*)")
-        .eq("order_id", ctx?.params?.id);
+  let { data: order_items, error: order_item_errors } = await supabaseClient
+    .from("order_item")
+    .select("*, id(*)")
+    .eq("order_id", id);
 
   return {
     props: {
       order: data,
       order_items,
-      signature: response.data
+      signature: response.data,
     },
   };
 }
