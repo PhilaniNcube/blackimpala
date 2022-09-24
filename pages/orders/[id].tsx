@@ -72,7 +72,6 @@ const Order = ({
 
                 <form
                   ref={formRef}
-
                   action={process.env.NEXT_PUBLIC_PAYFAST_URL}
                   method="POST"
                 >
@@ -107,11 +106,26 @@ const Order = ({
                     value={(order.shipping + order.order_total).toFixed(2)}
                   />
                   <input type="hidden" name="item_name" value={order.id} />
+                  <input
+                    type="hidden"
+                    name="name_first"
+                    value={order.first_name}
+                  />
+                  <input
+                    type="hidden"
+                    name="name_last"
+                    value={order.last_name}
+                  />
+                  <input
+                    type="hidden"
+                    name="email_address"
+                    value={order.email}
+                  />
+                  <input type="hidden" name="cell_number" value={order.phone_number} />
+                  <input type="hidden" name="email_confirmation" value="1"/>
+                  <input type="hidden" name="confirmation_address" value={order.email}/>
                   {/* <input type="hidden" name="signature" value={signature} /> */}
-                  <button
-
-                    className="px-12 py-2 bg-slate-50 rounded-lg text-slate-900 font-medium uppercase mt-4"
-                  >
+                  <button className="px-12 py-2 bg-slate-50 rounded-lg text-slate-900 font-medium uppercase mt-4">
                     Pay Now
                   </button>
                 </form>
