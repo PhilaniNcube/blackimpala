@@ -137,7 +137,7 @@ export default Order;
 
 export const getServerSideProps:GetServerSideProps = async (ctx) => {
 
-  let { data, error } = await supabaseServerClient(ctx)
+  let { data, error } = await supabaseClient
     .from("orders")
     .select("*")
     .eq("id", ctx?.params?.id)
