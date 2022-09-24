@@ -4,8 +4,8 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { NextRequest, NextResponse } from "next/server";
 import { ContextType, Fragment, useState, useRef, useEffect } from "react";
-import { IOrderItem, IOrderType } from "../../../types";
-import { formatCurrency } from "../../../utilities/formatCurrency";
+import { IOrderItem, IOrderType } from "../../types";
+import { formatCurrency } from "../../utilities/formatCurrency";
 
 const Order = ({
   order,

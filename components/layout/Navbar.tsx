@@ -72,7 +72,7 @@ const Navbar = () => {
   const {user} = useUser()
 
   return (
-    <nav className="w-full items-center flex bg-slate-800 absolute top-0 left-0 right-0 z-50" id="app__navbar">
+    <nav className="w-full items-center flex bg-slate-800  z-50" id="app__navbar">
       {/**Desktop Nav** **/}
       <div className="hidden max-w-7xl mx-auto w-full md:flex justify-between py-2 px-4">
         <div id="logo">

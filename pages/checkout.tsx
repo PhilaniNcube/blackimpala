@@ -59,7 +59,7 @@ const confirmOrder = async (e: React.FormEvent<HTMLFormElement>) => {
 
 
 
-      router.push(`/account/orders/${data.id}`)
+      router.push(`/orders/${data.id}`)
 
     }
 
