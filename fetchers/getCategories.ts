@@ -8,6 +8,7 @@ const getCategories = async () => {
 
   if (error) {
     throw new Error(error.message)
+    return
   }
   return categories
 

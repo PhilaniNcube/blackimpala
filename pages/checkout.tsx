@@ -55,9 +55,9 @@ const confirmOrder = async (e: React.FormEvent<HTMLFormElement>) => {
         const { data: order_item, error } = await supabaseClient
           .from("order_item")
           .insert([{ id: item.id, quantity: item.quantity, order_id: data.id }]);
-
-
       })
+
+
 
       router.push(`/account/orders/${data.id}`)
 

@@ -58,7 +58,10 @@ export interface IOrderType {
   email: string;
   postal_code: string;
   phone_number: string;
-  order_items: OrderItem[]
+  order_items: OrderItem[];
+  payment_id: string;
+  paid:boolean;
+  shipped:boolean;
 }
 
 export interface IOrderItem {

@@ -9,6 +9,7 @@ const getProducts = async () => {
 
   if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -20,6 +21,7 @@ export let getPlatters = async () => {
 
     if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 }
@@ -30,6 +32,7 @@ export let getBeers = async () => {
 
     if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 }
@@ -40,6 +43,7 @@ export const getCiders = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -50,6 +54,7 @@ export const getGins = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -60,6 +65,7 @@ export const getBrandy = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -70,6 +76,7 @@ export const getSalad = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -80,6 +87,7 @@ export const getStarch = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -90,6 +98,7 @@ export const getPizza = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -100,6 +109,7 @@ export const getWine = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -110,6 +120,7 @@ export const getChampagne = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -120,6 +131,7 @@ export const getSeafood = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -130,6 +142,7 @@ export const getPasta = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -140,6 +153,7 @@ export const getSoftDrinks = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -150,6 +164,7 @@ export const getStews = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -160,6 +175,7 @@ export const getLightMeals = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -170,6 +186,7 @@ export const getBreakfasts = async () => {
 
       if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product[]
 
@@ -180,6 +197,7 @@ export const getProductById = async (id:string) =>  {
 
           if (error) {
     throw new Error(error.message)
+    return
   }
   return products as Product
 }
