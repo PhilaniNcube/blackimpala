@@ -47,7 +47,8 @@ const Home = ({ platters }: { platters: Product[] }) => {
       <HomeHero />
       <HomeSectionOne />
       <HomeMenu />
-      <MenuList platters={data} />
+      {data && <MenuList platters={data} />}
+
       <FounderSection />
       <Testimonials />
       <Recognitions />
