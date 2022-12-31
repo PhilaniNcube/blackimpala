@@ -50,6 +50,8 @@ const confirmOrder = async (e: React.FormEvent<HTMLFormElement>) => {
     ])
     .single();
 
+    console.log({data, error})
+
     if(data) {
       cartItems.forEach(async (item) => {
         const { data: order_item, error } = await supabaseClient
