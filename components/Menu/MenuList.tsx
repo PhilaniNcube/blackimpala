@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/future/image";
 import Link from "next/link";
 import { Fragment } from "react";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 import { getBeers, getLightMeals, getPlatters, getSalad, getStews } from "../../fetchers/getProducts";
 
 const MenuList = () => {
@@ -36,7 +37,7 @@ const MenuList = () => {
     refetchOnWindowFocus: false,
   })
 
-
+const {increaseCartQuantity} = useShoppingCart()
 
   return (
     <section className="bg-slate-800">
@@ -67,6 +68,12 @@ const MenuList = () => {
                     <p className="text-slate-200 mt-2 text-xs">
                       {item.description}
                     </p>
+                    <button
+                      className="bg-white text-slate-800 mt-3 px-6 py-2 rounded"
+                      onClick={() => increaseCartQuantity(item.id)}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -98,7 +105,13 @@ const MenuList = () => {
                   <div className="pr-2">
                     <p className="text-slate-200 mt-2 text-xs">
                       {item.description}
-                    </p>
+                    </p>{" "}
+                    <button
+                      className="bg-white text-slate-800 mt-3 px-6 py-2 rounded"
+                      onClick={() => increaseCartQuantity(item.id)}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -130,7 +143,13 @@ const MenuList = () => {
                   <div className="pr-2">
                     <p className="text-slate-200 mt-2 text-xs">
                       {item.description}
-                    </p>
+                    </p>{" "}
+                    <button
+                      className="bg-white text-slate-800 mt-3 px-6 py-2 rounded"
+                      onClick={() => increaseCartQuantity(item.id)}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -162,7 +181,13 @@ const MenuList = () => {
                   <div className="pr-2">
                     <p className="text-slate-200 mt-2 text-xs">
                       {item.description}
-                    </p>
+                    </p>{" "}
+                    <button
+                      className="bg-white text-slate-800 mt-3 px-6 py-2 rounded"
+                      onClick={() => increaseCartQuantity(item.id)}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -194,7 +219,13 @@ const MenuList = () => {
                   <div className="pr-2">
                     <p className="text-slate-200 mt-2 text-xs">
                       {item.description}
-                    </p>
+                    </p>{" "}
+                    <button
+                      className="bg-white text-slate-800 mt-3 px-6 py-2 rounded"
+                      onClick={() => increaseCartQuantity(item.id)}
+                    >
+                      Add To Cart
+                    </button>
                   </div>
                 </div>
               </Link>

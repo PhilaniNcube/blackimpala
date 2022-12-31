@@ -63,8 +63,7 @@ const Product = ({ product }: { product: Product }) => {
                 R{product.price.toFixed(2)}
               </h2>
 
-              {user ? (
-                <Fragment>
+               <Fragment>
                   <div className="flex space-x-3 items-center mt-8">
                     <span className="text-white text-2xl font-bold">
                       Quantity
@@ -90,21 +89,8 @@ const Product = ({ product }: { product: Product }) => {
                     {closed ? "Closed" : "Add To Cart"}
                   </button>
                 </Fragment>
-              ) : (
-                <div className="mt-3 flex flex-col md:flex-row md:justify-center md:items-center space-y-2 md:space-y-0 md:space-x-3">
-                  <Link href="/sign-in">
-                    <button className="bg-white text-slate-800 text-sm md:text-xl font-medium px-8 py-2 rounded">
-                      Please Sign In First{" "}
-                    </button>
-                  </Link>
-                  <p className="text-white font-brand text-2xl text-center">Or</p>
-                  <Link href="/sign-in">
-                    <button className="bg-white text-slate-800 text-sm md:text-xl font-medium px-8 py-2 rounded">
-                      Create An Account
-                    </button>
-                  </Link>
-                </div>
-              )}
+
+
 
               {closed && (
                 <p className="mt-4 text-yellow-200 font-brand text-xl font-bold">
