@@ -1,5 +1,6 @@
 import { getProductById } from "@/lib/fetchers/products";
 
+
 const DashboardProductPage = async ({id}:{id:number}) => {
 
   const { product, error } = await getProductById(id);
@@ -9,7 +10,8 @@ const DashboardProductPage = async ({id}:{id:number}) => {
   }
 
   return <div className="w-full">
-       <h1 className="text-2xl font-bold">Product: {product.name}</h1>
+       <h1 className="text-2xl font-bold">{product.name}</h1>
+
   </div>;
 };
 export default DashboardProductPage;

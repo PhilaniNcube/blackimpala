@@ -9,7 +9,7 @@ const ProductsPage = ({searchParams}: {searchParams: {[key:string]: string | str
 
   const page = searchParams.page ? parseInt(searchParams.page as string) : 1
 
-  console.log({page})
+
 
   return (
 			<div>

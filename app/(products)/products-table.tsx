@@ -7,7 +7,7 @@ const ProductsTable = async ({page}:{page:number}) => {
 
   const { products, error, count } = await getProducts(page, limit);
 
-  console.log({products, error, count});
+
 
   // find the total number of pages
   const totalPages = Math.ceil(count / limit);

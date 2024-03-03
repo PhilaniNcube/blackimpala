@@ -60,7 +60,7 @@ export const columns: ColumnDef<
 		accessorKey: "status",
 		header: "Status",
 		cell: ({ row }) => {
-      console.log(row.getValue("id"))
+
       const status = row.getValue("status") as string;
       return <div className="capitalize">{status === 'active' ? <Badge variant="default">{status}</Badge> : <Badge variant="destructive">{status}</Badge>}</div>;
     },
