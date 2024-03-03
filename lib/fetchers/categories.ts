@@ -6,7 +6,7 @@ export async function getCategories() {
 
   // write a trycatch block to gracefully handle errors
   try {
-    const { data, error } = await supabase.from('categories').select('*')
+    const { data, error } = await supabase.from('categories').select('*').order('name', { ascending: true })
     if(error) {
       return {
         error: error.message,
