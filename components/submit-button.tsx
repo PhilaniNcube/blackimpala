@@ -13,7 +13,7 @@ export function SubmitButton({ children, pendingText, ...props }: Props) {
 
 
   return (
-    <Button {...props} type="submit" aria-disabled={pending}>
+    <Button {...props} type="submit" className="w-full lg:w-1/3 disabled:bg-slate-600" aria-disabled={pending}>
       {pending ? pendingText : children}
     </Button>
   );

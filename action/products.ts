@@ -5,6 +5,7 @@ import { z } from "zod"
 import slugify from "slugify"
 import { createClient } from "@/utils/supabase/server"
 import { Database } from "@/schema"
+import { revalidatePath } from "next/cache"
 
 type PrevState = {
   errors?: {
@@ -119,18 +120,35 @@ const { data, error } = await supabase
 
 }
 
-export async function updateProduct(prevState:PrevState, formData:FormData, productId:number) {
+
+const updateProductFormSchema = z.object({
+  name: z.string().min(3).trim(),
+  price: z.string(),
+  description: z.string().min(3).trim(),
+  stock: z.string(),
+  category_id: z.string(),
+  brand_id: z.string().optional(),
+  status: z.enum(["active", "draft"]),
+  product_id: z.string(),
+})
+
+
+export async function updateProduct(prevState:PrevState, formData:FormData) {
 
 
 
-  const validationResult = createProductFormSchema.safeParse({
+  const validationResult = updateProductFormSchema.safeParse({
     name: formData.get("name") as string,
     price: formData.get("price") as string,
     description: formData.get("description") as string,
     stock: formData.get("stock") as string,
     category_id: formData.get("category_id") as string,
     brand_id: formData.get("brand_id") as string,
+    status: formData.get("status") as string,
+    product_id: formData.get("product_id") as string,
   })
+
+  console.log({validationResult})
 
   if (!validationResult.success) {
 
@@ -142,7 +160,7 @@ export async function updateProduct(prevState:PrevState, formData:FormData, prod
   }
 }
 
-const slug = slugify(validationResult.data.name, { lower: true })
+
 
 
    const supabase = createClient()
@@ -158,8 +176,10 @@ const { data, error } = await supabase
       stock: Number(validationResult.data.stock),
       category_id: Number(validationResult.data.category_id),
       brand_id: Number(validationResult.data.brand_id),
-      slug,
-     },).eq('id', productId).select('*').single()
+      status: validationResult.data.status,
+     },).eq('id', Number(validationResult.data.product_id)).select('*').single()
+
+     console.log({data, error})
 
 
   if(error) {
@@ -175,6 +195,9 @@ const { data, error } = await supabase
       message: "There was an error updating the product",
     }
   }
+
+  revalidatePath("/dashboard/products")
+  revalidatePath("/")
 
   return {
     errors: {
@@ -216,10 +239,10 @@ export async function updateProductStatus(prevState:{message: string}, formData:
 
 
 
-const productId = Number(formData.get("product_id"))
+const product_id = Number(formData.get("product_id"))
 const status = formData.get("status") as "active" | "draft"
 
-console.log({productId, status})
+console.log({product_id, status})
 
 
    const supabase = createClient()
@@ -230,7 +253,7 @@ const { data, error } = await supabase
   .from('products')
   .update({
       status: status
-     },).eq('id', productId).select('*').single()
+     },).eq('id', product_id).select('*').single()
 
 
 console.log({data, error})
