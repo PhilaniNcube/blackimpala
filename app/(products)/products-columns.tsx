@@ -1,5 +1,6 @@
 "use client"
 
+import { updateProductStatus } from "@/action/products";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -61,15 +62,45 @@ export const columns: ColumnDef<
 		header: "Status",
 		cell: ({ row }) => {
 
-      const status = row.getValue("status") as string;
-      return <div className="capitalize">{status === 'active' ? <Badge variant="default">{status}</Badge> : <Badge variant="destructive">{status}</Badge>}</div>;
+      const { id, status } = row.original;
+
+
+      return (
+							<div className="capitalize">
+								{status === "active" ? (
+									<Badge
+										variant="default"
+										className="text-white bg-green-500 cursor-pointer"
+										onClick={async () => {
+											await updateProductStatus(id, "draft");
+										}}
+									>
+										{status}
+									</Badge>
+								) : (
+									<Badge
+										className="text-white bg-red-600 cursor-pointer"
+										onClick={async () => {
+											await updateProductStatus(id, 'active');
+										}}
+										variant="destructive"
+									>
+										{status}
+									</Badge>
+								)}
+							</div>
+						);
     },
 	},
 	{
 		accessorKey: "id",
 		header: "View Product",
 		cell: ({ row }) => {
+
+
+
 			return (
+
 				<Link href={`/dashboard/products/${row.getValue("id")}`}>
 					<Button size="sm" variant="outline">
 						View

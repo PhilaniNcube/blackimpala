@@ -234,15 +234,10 @@ const { data, error } = await supabase
 
 
 
-export async function updateProductStatus(prevState:{message: string}, formData:FormData) {
+export async function updateProductStatus(product_id:number, status:'active' | 'draft') {
 
 
 
-
-const product_id = Number(formData.get("product_id"))
-const status = formData.get("status") as "active" | "draft"
-
-console.log({product_id, status})
 
 
    const supabase = createClient()
@@ -257,6 +252,8 @@ const { data, error } = await supabase
 
 
 console.log({data, error})
+
+revalidatePath("/dashboard/products")
 
 
   if(error) {
