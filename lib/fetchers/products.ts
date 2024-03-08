@@ -100,6 +100,56 @@ export async function getActiveProducts(page=1, limit=20) {
 }
 
 
+export async function getActiveProductsByCategory(category_id:number, page=1, limit=20 ) {
+  const supabase = createClient();
+
+  // calculate the start and end limits for pagination
+  const start = (page - 1) * limit;
+  const end = start + limit;
+
+
+
+  try {
+
+    const {
+    data,
+    error,
+    count
+  } = await supabase.from('products').select('*',  { count: 'exact', head: false }).order('name', {
+    ascending: true
+  }).eq('status', 'active').eq('category_id', category_id).range(start, end);
+
+
+
+  if (error) {
+    return {
+      products: null,
+      count: 0,
+      error: error.message
+    };
+  }
+
+  return {
+    products: data,
+    count: count || 0,
+    error: null
+  }
+
+  } catch (error) {
+
+
+
+    return {
+      products: null,
+      count:0,
+      error: "An error occurred while fetching products"
+    };
+
+  }
+
+}
+
+
 export async function getProductById(id:number) {
 
     const supabase = createClient();
