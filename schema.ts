@@ -352,6 +352,36 @@ export type Database = {
           }
         ]
       }
+      weekly_events: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          image: string | null
+          name: string
+          slug: string
+          venue: Database["public"]["Enums"]["venue"]
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          image?: string | null
+          name?: string
+          slug?: string
+          venue: Database["public"]["Enums"]["venue"]
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          image?: string | null
+          name?: string
+          slug?: string
+          venue?: Database["public"]["Enums"]["venue"]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -365,6 +395,7 @@ export type Database = {
     Enums: {
       order_status: "pending" | "processing" | "completed"
       status: "draft" | "active"
+      venue: "Black Impala Restaurant" | "Black Impala Tshisanyama"
     }
     CompositeTypes: {
       [_ in never]: never
