@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const MenuHeader = () => {
   return (
-			<section className="relative">
+			<section className="relative mb-8">
 				<Image
 					src="/images/meal.jpg"
 					alt="Meal"
