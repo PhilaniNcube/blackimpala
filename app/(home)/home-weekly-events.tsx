@@ -6,7 +6,7 @@ export const revalidate = 60 * 60 * 24;
 const HomeWeeklyEvents = async () => {
 
   const { events, error } = await getWeeklyEvents();
-  console.log(events);
+
 
   return (
 			<section className="py-16">
