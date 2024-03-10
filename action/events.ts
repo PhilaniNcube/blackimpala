@@ -6,6 +6,7 @@ import { z } from "zod";
 
 type PrevState = {
   message: string;
+  event_slug: string;
 }
 
 const formSchema = z.object({
@@ -36,6 +37,7 @@ export async function createEvent(prevState:PrevState, formData:FormData) {
     console.log(validatedFields.error.errors)
     return {
       message: "Invalid form fields",
+      event_slug: "",
     }
   }
 
@@ -49,21 +51,24 @@ export async function createEvent(prevState:PrevState, formData:FormData) {
     location: validatedFields.data.location,
     time: validatedFields.data.time,
     price: Number(validatedFields.data.price),
-  }).select("*")
+  }).select("*").single()
 
   if(error?.code === "23505") {
     return {
       message: `Error creating event: The title ${validatedFields.data.title} already exists. Please choose a different title.`,
+      event_slug: "",
     }
   }
   if (error) {
     return {
       message: `Error creating event: ${error.message}`,
+      event_slug: "",
     }
   }
 
   return {
     message: "Event created successfully",
+    event_slug: data.slug,
   }
 
 }

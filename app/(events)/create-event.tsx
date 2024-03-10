@@ -28,6 +28,7 @@ import { SubmitButton } from "@/components/submit-button";
 import { Separator } from "@/components/ui/separator";
 import { useFormState } from "react-dom";
 import { createEvent } from "@/action/events";
+import { startTransition } from "react";
 
 const formSchema = z.object({
   date: z.date(),
@@ -39,12 +40,15 @@ const formSchema = z.object({
 })
 
 const initialState = {
-  message: ""
+  message: "",
+  event_slug: "",
 }
 
 const CreateEventForm = () => {
 
    const [state, formAction] = useFormState(createEvent, initialState);
+
+
 
     const form = useForm<z.infer<typeof formSchema>>({
 					resolver: zodResolver(formSchema),
@@ -54,8 +58,10 @@ const CreateEventForm = () => {
 				});
 
      async function onSubmit(values: z.infer<typeof formSchema>) {
-						console.log(values);
+
 						const formData = new FormData();
+
+
 
 						formData.append("date", values.date.toISOString());
 						formData.append("title", values.title);
@@ -65,6 +71,8 @@ const CreateEventForm = () => {
 						formData.append("price", values.price);
 
             await formAction(formData);
+
+
 					}
 
 	return (
