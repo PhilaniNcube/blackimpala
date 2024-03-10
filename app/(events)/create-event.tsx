@@ -1,9 +1,10 @@
 "use client";
 
+import {useRef, useState} from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import {
 	Popover,
@@ -29,6 +30,8 @@ import { Separator } from "@/components/ui/separator";
 import { useFormState } from "react-dom";
 import { createEvent } from "@/action/events";
 import { startTransition } from "react";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 const formSchema = z.object({
   date: z.date(),
@@ -47,8 +50,7 @@ const initialState = {
 const CreateEventForm = () => {
 
    const [state, formAction] = useFormState(createEvent, initialState);
-
-
+   const [isSubmitting, setIsSubmitting] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
 					resolver: zodResolver(formSchema),
@@ -57,11 +59,11 @@ const CreateEventForm = () => {
 					},
 				});
 
+        const formRef = useRef<HTMLFormElement>(null);
+
      async function onSubmit(values: z.infer<typeof formSchema>) {
-
+            setIsSubmitting(true);
 						const formData = new FormData();
-
-
 
 						formData.append("date", values.date.toISOString());
 						formData.append("title", values.title);
@@ -72,14 +74,26 @@ const CreateEventForm = () => {
 
             await formAction(formData);
 
+            setIsSubmitting(false);
+            if(state?.event_slug) {
+              redirect(`/dashboard/events/${state?.event_slug}`);
+            }
+
 
 					}
 
 	return (
 		<div className="w-full">
 			<Form {...form}>
-				<form  onSubmit={form.handleSubmit(onSubmit)} className="w-full px-2">
-        <p className="text-sm text-red-600">{state?.message}</p>
+				<form
+					action={formAction}
+					ref={formRef}
+					onSubmit={form.handleSubmit(onSubmit)}
+					className="w-full px-2"
+				>
+					<p className="text-sm text-red-600">
+						{state?.message}. {state.event_slug !== "" && <Link className="font-medium underline" href={`/dashboard/events/${state.event_slug}`}>View Event</Link>}
+					</p>
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
 						<FormField
 							control={form.control}
@@ -90,7 +104,6 @@ const CreateEventForm = () => {
 									<FormControl>
 										<Input placeholder="Event title" {...field} />
 									</FormControl>
-
 								</FormItem>
 							)}
 						/>{" "}
@@ -103,7 +116,6 @@ const CreateEventForm = () => {
 									<FormControl>
 										<Input placeholder="Event venue" {...field} />
 									</FormControl>
-
 								</FormItem>
 							)}
 						/>
@@ -148,7 +160,9 @@ const CreateEventForm = () => {
 											</PopoverContent>
 										</Popover>
 
-                   <FormMessage>{form.formState.errors.date?.message}</FormMessage>
+										<FormMessage>
+											{form.formState.errors.date?.message}
+										</FormMessage>
 									</FormItem>
 								)}
 							/>{" "}
@@ -161,7 +175,6 @@ const CreateEventForm = () => {
 										<FormControl>
 											<Input type="time" placeholder="Event time" {...field} />
 										</FormControl>
-
 									</FormItem>
 								)}
 							/>{" "}
@@ -174,7 +187,6 @@ const CreateEventForm = () => {
 										<FormControl>
 											<Input placeholder="" type="number" {...field} />
 										</FormControl>
-
 									</FormItem>
 								)}
 							/>
@@ -192,16 +204,19 @@ const CreateEventForm = () => {
 											{...field}
 										/>
 									</FormControl>
-
-
 								</FormItem>
 							)}
 						/>
 					</div>
-          <Separator className="my-3" />
+					<Separator className="my-3" />
 					<div className="">
-
-						<SubmitButton>Submit</SubmitButton>
+						<Button
+							type="submit"
+							aria-disabled={isSubmitting}
+							className="w-1/3"
+						>
+							{isSubmitting ? "Submitting..." : "Submit"}
+						</Button>
 					</div>
 				</form>
 			</Form>

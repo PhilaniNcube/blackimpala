@@ -1,6 +1,7 @@
 "use server"
 
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 import slugify from "slugify";
 import { z } from "zod";
 
@@ -68,7 +69,8 @@ export async function createEvent(prevState:PrevState, formData:FormData) {
 
   return {
     message: "Event created successfully",
-    event_slug: data.slug,
+    event_slug: data?.slug,
   }
+
 
 }
