@@ -32,3 +32,47 @@ export async function getWeeklyEvents() {
   }
 
 }
+
+
+export async function getEvents(page=1, limit=20) {
+
+  const supabase = createClient();
+
+  const start = (page - 1) * limit;
+  const end = start + limit;
+
+  try {
+
+    const {
+      data,
+      error,
+      count
+    } = await supabase.from('events').select('*',  { count: 'exact', head: false }).order('date', {
+      ascending: true
+    }).range(start, end);
+
+    if (error) {
+      return {
+        events: null,
+        count: 0,
+        error: error.message
+      };
+    }
+
+    return {
+      events: data,
+      count: count || 0,
+      error: null
+    }
+
+  } catch (error) {
+
+    return {
+      events: null,
+      count:0,
+      error: "An error occurred while fetching events"
+    };
+
+  }
+
+}

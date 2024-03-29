@@ -39,7 +39,7 @@ const HomePageImageGrid = () => {
 								layout="fill"
 								className="w-full h-full overflow-hidden rounded-md aspect-video"
 								objectFit="cover"
-								objectPosition="center"
+
 							/>
 						</div>
 					))}

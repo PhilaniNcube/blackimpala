@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import { getActiveProductsByCategory, getProductByCategoryId } from "@/lib/fetchers/products";
 import { formatCurrency } from "@/lib/utils";
-import { Database } from "@/schema";
+import type { Database } from "@/schema";
 
 
 type MenuSectionProps = {

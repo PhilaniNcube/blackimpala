@@ -32,7 +32,7 @@ const HomeWeeklyEvents = async () => {
 												alt={event.name}
 												width={960}
                         height={640}
-												objectPosition="center"
+
 												className="object-cover w-full rounded-t-md aspect-video"
 											/>
 										)}

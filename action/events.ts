@@ -1,6 +1,7 @@
 "use server"
 
 import { createClient } from "@/utils/supabase/server";
+import { format } from "date-fns";
 import { redirect } from "next/navigation";
 import slugify from "slugify";
 import { z } from "zod";
@@ -46,7 +47,7 @@ export async function createEvent(prevState:PrevState, formData:FormData) {
 
   const { data, error } = await supabase.from("events").insert({
     slug,
-    date: validatedFields.data.date,
+    date: format(validatedFields.data.date, 'yyyy-MM-dd'),
     title: validatedFields.data.title,
     description: validatedFields.data.description,
     location: validatedFields.data.location,
