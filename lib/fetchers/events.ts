@@ -76,3 +76,37 @@ export async function getEvents(page=1, limit=20) {
   }
 
 }
+
+
+export async function getEvent(slug:string) {
+
+    const supabase = createClient();
+
+    try {
+
+      const {
+        data,
+        error
+      } = await supabase.from('events').select('*').eq('slug', slug).single();
+
+      if (error) {
+        return {
+          event: null,
+          error: error.message
+        };
+      }
+
+      return {
+        event: data,
+        error: null
+      }
+
+    } catch (error) {
+
+      return {
+        event: null,
+        error: "An error occurred while fetching event"
+      };
+
+    }
+}

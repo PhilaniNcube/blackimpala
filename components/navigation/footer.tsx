@@ -13,10 +13,7 @@ export default function Footer() {
 		<footer className="w-full py-6 bg-zinc-950 dark text-gray-50">
 			<div className="container grid grid-cols-1 gap-4 px-4 mx-auto md:px-6 lg:px-0 md:grid-cols-2 lg:grid-cols-4">
 				<div className="flex items-center justify-center md:justify-start">
-					<Link href="/">
-						<MenuIcon className="w-6 h-6" />
-						<span className="sr-only">Black Impala</span>
-					</Link>
+
 				</div>
 				<div className="flex flex-col items-center space-y-2 md:items-start">
 					<p className="font-semibold">Contact Us</p>

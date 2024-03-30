@@ -43,7 +43,7 @@ export async function uploadEventImage(formData: FormData) {
       revalidatePath("/events");
   }
 
-  revalidatePath("dashboard/events/");
+  revalidatePath(`dashboard/events/${slug}`);
 
 }
 
