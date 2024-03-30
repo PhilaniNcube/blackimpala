@@ -5,11 +5,14 @@ import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
 const EventsPage = ({
-	searchparams,
-}: { searchparams: { [key: string]: string | string[] | undefined } }) => {
-
-  const page = searchparams?.page ? Number(searchparams.page as string) : 1;
-  console.log(page);
+	searchParams,
+}: {
+	searchParams?: {
+		page?: string;
+	};
+}) => {
+	const page = Number(searchParams?.page) || 1;
+	console.log(page);
 
 	return (
 		<div>
@@ -23,7 +26,7 @@ const EventsPage = ({
 				</Link>
 			</div>
 			<Separator className="my-3" />
-      <EventsTable page={page} />
+			<EventsTable page={page} />
 		</div>
 	);
 };
