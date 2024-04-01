@@ -62,7 +62,7 @@ const pathname = usePathname()
 						</NavigationMenuLink>
 					</Link>
 				</NavigationMenuItem>
-				<NavigationMenuItem className="bg-black">
+				{/* <NavigationMenuItem className="bg-black">
 					<Link
 						href="/about"
 						legacyBehavior
@@ -76,7 +76,7 @@ const pathname = usePathname()
 							About Us
 						</NavigationMenuLink>
 					</Link>
-				</NavigationMenuItem>
+				</NavigationMenuItem> */}
 				<NavigationMenuItem className="bg-black">
 					<Link
 						href="/contact"

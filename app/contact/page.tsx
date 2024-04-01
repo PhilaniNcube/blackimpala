@@ -1,4 +1,8 @@
+import ContactUs from "../(contact)/contact-us";
+
 const ContactPage = () => {
-  return <div>ContactPage</div>;
+  return <div>
+    <ContactUs />
+  </div>;
 };
 export default ContactPage;
