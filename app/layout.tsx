@@ -2,6 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import DesktopNavigation from "@/components/navigation/desktop-navigation";
 import Footer from "@/components/navigation/footer";
+import { CartStoreProvider } from "@/providers/cart-store-provider";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -19,14 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
-        <DesktopNavigation />
-        <main className="">
-          {children}
-        </main>
-        <Footer />
-      </body>
-    </html>
-  );
+			<html lang="en" className={GeistSans.className}>
+				<body className="bg-background text-foreground">
+					<CartStoreProvider>
+						<DesktopNavigation />
+						<main className="">{children}</main>
+						<Footer />
+					</CartStoreProvider>
+				</body>
+			</html>
+		);
 }

@@ -14,7 +14,7 @@ import Link from "next/link";
 
 const EventsTable = async ({ page }: { page: number }) => {
 	const { events, count, error } = await getEvents(page);
-	console.log({ events, count, error });
+
 
   if (error || !events || events.length === 0) {
     return <div className="flex items-center justify-center py-20">

@@ -4,6 +4,7 @@ import { getActiveProductsByBrand, getActiveProductsByCategory } from "@/lib/fet
 import { formatCurrency } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import AddToCart from "../(products)/add-to-cart";
 
 const HomeMenu = async () => {
 
@@ -32,6 +33,7 @@ const HomeMenu = async () => {
 						) : products ? (
 							<div className="grid grid-cols-1 gap-10 py-4 lg:gap-16 md:grid-cols-2">
 								{products.map((product) => (
+                <div key={product.id}>
 									<Link
 										href={`/menu/${product.slug}`}
 										key={product.id}
@@ -48,6 +50,8 @@ const HomeMenu = async () => {
 										</p>
 										<Separator className="my-2" />
 									</Link>
+										<AddToCart product={product} />
+                    </div>
 								))}
 							</div>
 						) : (

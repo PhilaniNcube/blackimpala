@@ -4,6 +4,7 @@ import NavMenu from "./nav-menu";
 import AuthNavigation from "./auth-navigation";
 import { is_admin } from "@/lib/fetchers/auth";
 import { Separator } from "../ui/separator";
+import CartNav from "./cart-nav";
 
 
 const DesktopNavigation = async () => {
@@ -20,6 +21,7 @@ const DesktopNavigation = async () => {
 					</Link>
 					<div className="flex items-center space-x-3">
 						<NavMenu />
+            <CartNav />
 						{admin ? (
 							<>
                 <Separator orientation="vertical" className="mx-3" />

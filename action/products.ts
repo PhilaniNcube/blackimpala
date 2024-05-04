@@ -148,7 +148,6 @@ export async function updateProduct(prevState:PrevState, formData:FormData) {
     product_id: formData.get("product_id") as string,
   })
 
-  console.log({validationResult})
 
   if (!validationResult.success) {
 
@@ -179,7 +178,7 @@ const { data, error } = await supabase
       status: validationResult.data.status,
      },).eq('id', Number(validationResult.data.product_id)).select('*').single()
 
-     console.log({data, error})
+
 
 
   if(error) {
@@ -251,7 +250,7 @@ const { data, error } = await supabase
      },).eq('id', product_id).select('*').single()
 
 
-console.log({data, error})
+
 
 revalidatePath("/dashboard/products")
 

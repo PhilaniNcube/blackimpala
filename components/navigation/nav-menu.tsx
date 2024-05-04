@@ -6,12 +6,15 @@ import React from "react";
 import Link from "next/link";
 import { Database } from "@/schema";
 import { usePathname } from "next/navigation";
+import { useCartStore } from "@/providers/cart-store-provider";
 
 
 
 const NavMenu = () => {
 
 const pathname = usePathname()
+
+
 
 
 	return (

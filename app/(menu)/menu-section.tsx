@@ -2,6 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { getActiveProductsByCategory, getProductByCategoryId } from "@/lib/fetchers/products";
 import { formatCurrency } from "@/lib/utils";
 import type { Database } from "@/schema";
+import AddToCart from "../(products)/add-to-cart";
 
 
 type MenuSectionProps = {
@@ -25,6 +26,7 @@ export default async function MenuSection({  category }: MenuSectionProps) {
 								<h4 className="text-lg font-medium lg:text-xl text-zinc-900">{item.name}</h4>
 								<p className="text-sm lowercase line-clamp-1">{item.description}</p>
 								<p className="text-lg font-bold">{formatCurrency(item.price)}</p>
+                <AddToCart product={item} />
                 <Separator className="my-2" />
 							</article>
 						))}
