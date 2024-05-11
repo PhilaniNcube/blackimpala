@@ -1,5 +1,6 @@
 "use client"
 
+import { Badge } from "@/components/ui/badge";
 import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
 import {
 	TableHead,
@@ -10,14 +11,13 @@ import {
 	Table,
 } from "@/components/ui/table";
 import { formatCurrency } from "@/lib/utils";
-import { useCartStore } from "@/providers/cart-store-provider";
 import type { OrderItem } from "@/schema";
 
 export const OrderItems = ({order_items}:{order_items: OrderItem[]}) => {
 
   return (
 			<Card>
-				<CardHeader>
+				<CardHeader className="">
 					<CardTitle>Order Items</CardTitle>
 				</CardHeader>
 				<CardContent>

@@ -11,6 +11,7 @@ const envVariables = z.object({
 	NEXT_PUBLIC_CLOUDINARY_SECRET: z.string(),
 	NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
 	RESEND_API_KEY: z.string(),
+	SUPABASE_SERVICE_ROLE: z.string(),
 });
 
 envVariables.parse(process.env);
