@@ -24,7 +24,7 @@ const DesktopNavigation = async () => {
             <CartNav />
 						{admin ? (
 							<>
-                <Separator orientation="vertical" className="mx-3" />
+                <Separator orientation="vertical" className="mx-3 text-white" />
 								<AuthNavigation />
 							</>
 						) : null}

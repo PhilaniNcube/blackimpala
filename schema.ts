@@ -6,402 +6,413 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export type Database = {
-  public: {
-    Tables: {
-      admins: {
-        Row: {
-          created_at: string
-          id: string
-          user_id: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          user_id?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "public_admins_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      brands: {
-        Row: {
-          created_at: string | null
-          description: string | null
-          id: number
-          image_url: string | null
-          name: string
-          slug: string
-        }
-        Insert: {
-          created_at?: string | null
-          description?: string | null
-          id?: number
-          image_url?: string | null
-          name: string
-          slug: string
-        }
-        Update: {
-          created_at?: string | null
-          description?: string | null
-          id?: number
-          image_url?: string | null
-          name?: string
-          slug?: string
-        }
-        Relationships: []
-      }
-      categories: {
-        Row: {
-          created_at: string
-          description: string
-          id: number
-          image_url: string | null
-          name: string
-          slug: string
-        }
-        Insert: {
-          created_at?: string
-          description: string
-          id?: number
-          image_url?: string | null
-          name: string
-          slug: string
-        }
-        Update: {
-          created_at?: string
-          description?: string
-          id?: number
-          image_url?: string | null
-          name?: string
-          slug?: string
-        }
-        Relationships: []
-      }
-      employees: {
-        Row: {
-          created_at: string | null
-          id: string
-          is_admin: boolean | null
-        }
-        Insert: {
-          created_at?: string | null
-          id: string
-          is_admin?: boolean | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          is_admin?: boolean | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "employees_id_profiles_id_fk"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      events: {
-        Row: {
-          created_at: string
-          date: string
-          description: string
-          id: number
-          image_url: string | null
-          location: string
-          price: number | null
-          slug: string
-          time: string
-          title: string
-        }
-        Insert: {
-          created_at?: string
-          date: string
-          description: string
-          id?: number
-          image_url?: string | null
-          location: string
-          price?: number | null
-          slug: string
-          time: string
-          title: string
-        }
-        Update: {
-          created_at?: string
-          date?: string
-          description?: string
-          id?: number
-          image_url?: string | null
-          location?: string
-          price?: number | null
-          slug?: string
-          time?: string
-          title?: string
-        }
-        Relationships: []
-      }
-      images: {
-        Row: {
-          height: number | null
-          id: number
-          product_id: number | null
-          url: string | null
-          width: number | null
-        }
-        Insert: {
-          height?: number | null
-          id?: number
-          product_id?: number | null
-          url?: string | null
-          width?: number | null
-        }
-        Update: {
-          height?: number | null
-          id?: number
-          product_id?: number | null
-          url?: string | null
-          width?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "images_product_id_products_id_fk"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      order_items: {
-        Row: {
-          id: number
-          order_id: string
-          price: number
-          product_id: number
-          quantity: number | null
-        }
-        Insert: {
-          id?: number
-          order_id: string
-          price: number
-          product_id: number
-          quantity?: number | null
-        }
-        Update: {
-          id?: number
-          order_id?: string
-          price?: number
-          product_id?: number
-          quantity?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "order_items_order_id_orders_id_fk"
-            columns: ["order_id"]
-            isOneToOne: false
-            referencedRelation: "orders"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "order_items_product_id_products_id_fk"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      orders: {
-        Row: {
-          city: string | null
-          created_at: string | null
-          id: string
-          order_amount: number | null
-          order_status: Database["public"]["Enums"]["order_status"] | null
-          phone_number: string | null
-          postal_code: number | null
-          profile_id: string
-          street_address: string | null
-        }
-        Insert: {
-          city?: string | null
-          created_at?: string | null
-          id?: string
-          order_amount?: number | null
-          order_status?: Database["public"]["Enums"]["order_status"] | null
-          phone_number?: string | null
-          postal_code?: number | null
-          profile_id: string
-          street_address?: string | null
-        }
-        Update: {
-          city?: string | null
-          created_at?: string | null
-          id?: string
-          order_amount?: number | null
-          order_status?: Database["public"]["Enums"]["order_status"] | null
-          phone_number?: string | null
-          postal_code?: number | null
-          profile_id?: string
-          street_address?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "orders_profile_id_fkey"
-            columns: ["profile_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      products: {
-        Row: {
-          brand_id: number | null
-          category_id: number
-          created_at: string | null
-          description: string
-          id: number
-          name: string
-          price: number
-          slug: string
-          status: Database["public"]["Enums"]["status"]
-          stock: number
-        }
-        Insert: {
-          brand_id?: number | null
-          category_id: number
-          created_at?: string | null
-          description: string
-          id?: number
-          name: string
-          price?: number
-          slug: string
-          status?: Database["public"]["Enums"]["status"]
-          stock?: number
-        }
-        Update: {
-          brand_id?: number | null
-          category_id?: number
-          created_at?: string | null
-          description?: string
-          id?: number
-          name?: string
-          price?: number
-          slug?: string
-          status?: Database["public"]["Enums"]["status"]
-          stock?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "products_brand_id_fkey"
-            columns: ["brand_id"]
-            isOneToOne: false
-            referencedRelation: "brands"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "products_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      profiles: {
-        Row: {
-          first_name: string
-          id: string
-          last_name: string
-          updated_at: string | null
-        }
-        Insert: {
-          first_name: string
-          id: string
-          last_name: string
-          updated_at?: string | null
-        }
-        Update: {
-          first_name?: string
-          id?: string
-          last_name?: string
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "profiles_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      weekly_events: {
-        Row: {
-          created_at: string
-          description: string
-          id: string
-          image: string | null
-          name: string
-          slug: string
-          venue: Database["public"]["Enums"]["venue"]
-        }
-        Insert: {
-          created_at?: string
-          description: string
-          id?: string
-          image?: string | null
-          name?: string
-          slug?: string
-          venue: Database["public"]["Enums"]["venue"]
-        }
-        Update: {
-          created_at?: string
-          description?: string
-          id?: string
-          image?: string | null
-          name?: string
-          slug?: string
-          venue?: Database["public"]["Enums"]["venue"]
-        }
-        Relationships: []
-      }
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-    }
-    Enums: {
-      order_status: "pending" | "processing" | "completed"
-      status: "draft" | "active"
-      venue: "Black Impala Restaurant" | "Black Impala Tshisanyama"
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
+  export type OrderItem = {
+    product: Database["public"]["Tables"]["products"]["Row"];
+    quantity: number;
   }
-}
+
+export type Database = {
+		public: {
+			Tables: {
+				admins: {
+					Row: {
+						created_at: string;
+						id: string;
+						user_id: string | null;
+					};
+					Insert: {
+						created_at?: string;
+						id?: string;
+						user_id?: string | null;
+					};
+					Update: {
+						created_at?: string;
+						id?: string;
+						user_id?: string | null;
+					};
+					Relationships: [
+						{
+							foreignKeyName: "public_admins_user_id_fkey";
+							columns: ["user_id"];
+							isOneToOne: false;
+							referencedRelation: "users";
+							referencedColumns: ["id"];
+						},
+					];
+				};
+				brands: {
+					Row: {
+						created_at: string | null;
+						description: string | null;
+						id: number;
+						image_url: string | null;
+						name: string;
+						slug: string;
+					};
+					Insert: {
+						created_at?: string | null;
+						description?: string | null;
+						id?: number;
+						image_url?: string | null;
+						name: string;
+						slug: string;
+					};
+					Update: {
+						created_at?: string | null;
+						description?: string | null;
+						id?: number;
+						image_url?: string | null;
+						name?: string;
+						slug?: string;
+					};
+					Relationships: [];
+				};
+				categories: {
+					Row: {
+						created_at: string;
+						description: string;
+						id: number;
+						image_url: string | null;
+						name: string;
+						slug: string;
+					};
+					Insert: {
+						created_at?: string;
+						description: string;
+						id?: number;
+						image_url?: string | null;
+						name: string;
+						slug: string;
+					};
+					Update: {
+						created_at?: string;
+						description?: string;
+						id?: number;
+						image_url?: string | null;
+						name?: string;
+						slug?: string;
+					};
+					Relationships: [];
+				};
+				employees: {
+					Row: {
+						created_at: string | null;
+						id: string;
+						is_admin: boolean | null;
+					};
+					Insert: {
+						created_at?: string | null;
+						id: string;
+						is_admin?: boolean | null;
+					};
+					Update: {
+						created_at?: string | null;
+						id?: string;
+						is_admin?: boolean | null;
+					};
+					Relationships: [
+						{
+							foreignKeyName: "employees_id_profiles_id_fk";
+							columns: ["id"];
+							isOneToOne: true;
+							referencedRelation: "profiles";
+							referencedColumns: ["id"];
+						},
+					];
+				};
+				events: {
+					Row: {
+						created_at: string;
+						date: string;
+						description: string;
+						id: number;
+						image_url: string | null;
+						location: string;
+						price: number | null;
+						slug: string;
+						time: string;
+						title: string;
+					};
+					Insert: {
+						created_at?: string;
+						date: string;
+						description: string;
+						id?: number;
+						image_url?: string | null;
+						location: string;
+						price?: number | null;
+						slug: string;
+						time: string;
+						title: string;
+					};
+					Update: {
+						created_at?: string;
+						date?: string;
+						description?: string;
+						id?: number;
+						image_url?: string | null;
+						location?: string;
+						price?: number | null;
+						slug?: string;
+						time?: string;
+						title?: string;
+					};
+					Relationships: [];
+				};
+				images: {
+					Row: {
+						height: number | null;
+						id: number;
+						product_id: number | null;
+						url: string | null;
+						width: number | null;
+					};
+					Insert: {
+						height?: number | null;
+						id?: number;
+						product_id?: number | null;
+						url?: string | null;
+						width?: number | null;
+					};
+					Update: {
+						height?: number | null;
+						id?: number;
+						product_id?: number | null;
+						url?: string | null;
+						width?: number | null;
+					};
+					Relationships: [
+						{
+							foreignKeyName: "images_product_id_products_id_fk";
+							columns: ["product_id"];
+							isOneToOne: false;
+							referencedRelation: "products";
+							referencedColumns: ["id"];
+						},
+					];
+				};
+				order_items: {
+					Row: {
+						id: number;
+						order_id: string;
+						price: number;
+						product_id: number;
+						quantity: number | null;
+					};
+					Insert: {
+						id?: number;
+						order_id: string;
+						price: number;
+						product_id: number;
+						quantity?: number | null;
+					};
+					Update: {
+						id?: number;
+						order_id?: string;
+						price?: number;
+						product_id?: number;
+						quantity?: number | null;
+					};
+					Relationships: [
+						{
+							foreignKeyName: "order_items_order_id_orders_id_fk";
+							columns: ["order_id"];
+							isOneToOne: false;
+							referencedRelation: "orders";
+							referencedColumns: ["id"];
+						},
+						{
+							foreignKeyName: "order_items_product_id_products_id_fk";
+							columns: ["product_id"];
+							isOneToOne: false;
+							referencedRelation: "products";
+							referencedColumns: ["id"];
+						},
+					];
+				};
+				orders: {
+					Row: {
+						city: string | null;
+						created_at: string | null;
+						id: string;
+						order_amount: number | null;
+						order_status: Database["public"]["Enums"]["order_status"] | null;
+						phone_number: string | null;
+						postal_code: number | null;
+						profile_id: string;
+						street_address: string | null;
+						order_items: OrderItem[];
+						email: string | null;
+					};
+					Insert: {
+						city?: string | null;
+						created_at?: string | null;
+						id?: string;
+						order_amount?: number | null;
+						order_status?: Database["public"]["Enums"]["order_status"] | null;
+						phone_number?: string | null;
+						postal_code?: number | null;
+						profile_id: string;
+						street_address?: string | null;
+						order_items: OrderItem[];
+						email: string | null;
+					};
+					Update: {
+						city?: string | null;
+						created_at?: string | null;
+						id?: string;
+						order_amount?: number | null;
+						order_status?: Database["public"]["Enums"]["order_status"] | null;
+						phone_number?: string | null;
+						postal_code?: number | null;
+						profile_id?: string;
+						street_address?: string | null;
+						order_items?: OrderItem[];
+						email?: string | null;
+					};
+					Relationships: [
+						{
+							foreignKeyName: "orders_profile_id_fkey";
+							columns: ["profile_id"];
+							isOneToOne: false;
+							referencedRelation: "profiles";
+							referencedColumns: ["id"];
+						},
+					];
+				};
+				products: {
+					Row: {
+						brand_id: number | null;
+						category_id: number;
+						created_at: string | null;
+						description: string;
+						id: number;
+						name: string;
+						price: number;
+						slug: string;
+						status: Database["public"]["Enums"]["status"];
+						stock: number;
+					};
+					Insert: {
+						brand_id?: number | null;
+						category_id: number;
+						created_at?: string | null;
+						description: string;
+						id?: number;
+						name: string;
+						price?: number;
+						slug: string;
+						status?: Database["public"]["Enums"]["status"];
+						stock?: number;
+					};
+					Update: {
+						brand_id?: number | null;
+						category_id?: number;
+						created_at?: string | null;
+						description?: string;
+						id?: number;
+						name?: string;
+						price?: number;
+						slug?: string;
+						status?: Database["public"]["Enums"]["status"];
+						stock?: number;
+					};
+					Relationships: [
+						{
+							foreignKeyName: "products_brand_id_fkey";
+							columns: ["brand_id"];
+							isOneToOne: false;
+							referencedRelation: "brands";
+							referencedColumns: ["id"];
+						},
+						{
+							foreignKeyName: "products_category_id_fkey";
+							columns: ["category_id"];
+							isOneToOne: false;
+							referencedRelation: "categories";
+							referencedColumns: ["id"];
+						},
+					];
+				};
+				profiles: {
+					Row: {
+						first_name: string;
+						id: string;
+						last_name: string;
+						updated_at: string | null;
+					};
+					Insert: {
+						first_name: string;
+						id: string;
+						last_name: string;
+						updated_at?: string | null;
+					};
+					Update: {
+						first_name?: string;
+						id?: string;
+						last_name?: string;
+						updated_at?: string | null;
+					};
+					Relationships: [
+						{
+							foreignKeyName: "profiles_id_fkey";
+							columns: ["id"];
+							isOneToOne: true;
+							referencedRelation: "users";
+							referencedColumns: ["id"];
+						},
+					];
+				};
+				weekly_events: {
+					Row: {
+						created_at: string;
+						description: string;
+						id: string;
+						image: string | null;
+						name: string;
+						slug: string;
+						venue: Database["public"]["Enums"]["venue"];
+					};
+					Insert: {
+						created_at?: string;
+						description: string;
+						id?: string;
+						image?: string | null;
+						name?: string;
+						slug?: string;
+						venue: Database["public"]["Enums"]["venue"];
+					};
+					Update: {
+						created_at?: string;
+						description?: string;
+						id?: string;
+						image?: string | null;
+						name?: string;
+						slug?: string;
+						venue?: Database["public"]["Enums"]["venue"];
+					};
+					Relationships: [];
+				};
+			};
+			Views: {
+				[_ in never]: never;
+			};
+			Functions: {
+				is_admin: {
+					Args: Record<PropertyKey, never>;
+					Returns: boolean;
+				};
+			};
+			Enums: {
+				order_status: "pending" | "processing" | "completed";
+				status: "draft" | "active";
+				venue: "Black Impala Restaurant" | "Black Impala Tshisanyama";
+			};
+			CompositeTypes: {
+				[_ in never]: never;
+			};
+		};
+	};
 
 export type Tables<
   PublicTableNameOrOptions extends
