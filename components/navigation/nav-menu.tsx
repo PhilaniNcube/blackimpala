@@ -18,7 +18,7 @@ const pathname = usePathname()
 
 
 	return (
-		<NavigationMenu>
+		<NavigationMenu className="">
 			<NavigationMenuList className="bg-black">
 				<NavigationMenuItem className="bg-black">
 					<Link

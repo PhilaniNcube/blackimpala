@@ -3,6 +3,8 @@ import "./globals.css";
 import DesktopNavigation from "@/components/navigation/desktop-navigation";
 import Footer from "@/components/navigation/footer";
 import { CartStoreProvider } from "@/providers/cart-store-provider";
+import NavMenu from "@/components/navigation/nav-menu";
+import MobileNav from "@/components/navigation/mobile-nav";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -24,6 +26,7 @@ export default function RootLayout({
 				<body className="bg-background text-foreground">
 					<CartStoreProvider>
 						<DesktopNavigation />
+            <MobileNav />
 						<main className="">{children}</main>
 						<Footer />
 					</CartStoreProvider>

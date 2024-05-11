@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { login } from "@/action/auth";
 import { SubmitButton } from "@/components/submit-button";
+import Link from "next/link";
 
 const LoginForm = () => {
   return (
@@ -39,13 +40,17 @@ const LoginForm = () => {
 				<Input id="password" name="password" required type="password" />
 			</div>
 		</CardContent>
-		<CardFooter>
+		<CardFooter className="flex flex-col space-y-3 justify-start items-start">
 			<SubmitButton
 				className="w-full h-10 text-white rounded bg-zinc-900"
 				pendingText="Loging In.."
 			>
 				Login
 			</SubmitButton>
+      <p className="text-sm">
+        Don't have an account?{" "}
+      <Link href="/sign-up" className="text-blue-600 underline">Sign Up</Link>
+      </p>
 		</CardFooter>
 	</Card>
 </form>

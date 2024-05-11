@@ -12,7 +12,7 @@ const page = async () => {
 
 
 	return (
-		<div>
+		<div className="min-h-screen">
 			{error || user === null ? (
 				<div className="container">
 					<h1 className="text-4xl font-semibold text-center">Checkout</h1>
