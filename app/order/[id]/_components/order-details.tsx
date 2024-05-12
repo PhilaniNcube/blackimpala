@@ -76,17 +76,17 @@ export default async function OrderDetails({id}:{id:string}) {
 								<Input
 									type="hidden"
 									name="return_url"
-									value={`https://${process.env.VERCEL_URL}order/${order.id}/success`}
+									value={`https://${process.env.VERCEL_URL}/order/${order.id}/success`}
 								/>
 								<Input
 									type="hidden"
 									name="cancel_url"
-									value={`https://${process.env.VERCEL_URL}order/${order.id}/cancel`}
+									value={`https://${process.env.VERCEL_URL}/order/${order.id}/cancel`}
 								/>
 								<Input
 									type="hidden"
 									name="notify_url"
-									value={`https://${process.env.VERCEL_URL}api/order/${order.id}/notify`}
+									value={`https://${process.env.VERCEL_URL}/api/order/${order.id}/notify`}
 								/>
 								<Input
 									type="hidden"
