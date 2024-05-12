@@ -12,5 +12,7 @@ export async function fetchOrderById(id:string) {
     .select("*")
     .eq("id", id)
     .single();
+
+
   return { data, error };
 }
