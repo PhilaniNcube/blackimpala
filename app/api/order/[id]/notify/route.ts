@@ -8,6 +8,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: NextRequest, res: Response) {
 	const supabase = createClient();
 
+
+
 	const formData = await req.formData();
 
 	const values = Object.fromEntries(formData.entries());
